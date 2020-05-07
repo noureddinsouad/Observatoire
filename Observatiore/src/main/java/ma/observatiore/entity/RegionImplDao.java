@@ -1,4 +1,4 @@
-package ma.observatiore.dao;
+package ma.observatiore.entity;
 
 import java.util.List;
 
