@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 
-import ma.observatiore.entity.Region;
 import ma.observatoire.dao.IRegionDao;
+import ma.observatoire.entitie.Region;
 
 @RestController
 

@@ -4,7 +4,8 @@ package ma.observatoire.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import ma.observatiore.entity.Region;
+import ma.observatoire.entitie.Region;
+
 
 public interface IRegionDao extends JpaRepository<Region, Double>{
 	
