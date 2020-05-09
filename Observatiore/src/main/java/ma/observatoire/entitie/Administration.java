@@ -17,7 +17,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -25,12 +24,8 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "administration")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Administration.findAll", query = "SELECT a FROM Administration a")
-    , @NamedQuery(name = "Administration.findByIdAdmin", query = "SELECT a FROM Administration a WHERE a.idAdmin = :idAdmin")
-    , @NamedQuery(name = "Administration.findByUsername", query = "SELECT a FROM Administration a WHERE a.username = :username")
-    , @NamedQuery(name = "Administration.findByPassword", query = "SELECT a FROM Administration a WHERE a.password = :password")})
+    @NamedQuery(name = "Administration.findAll", query = "SELECT a FROM Administration a")})
 public class Administration implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -110,7 +105,7 @@ public class Administration implements Serializable {
 
     @Override
     public String toString() {
-        return "jpa2.Administration[ idAdmin=" + idAdmin + " ]";
+        return "ma.observatoire.entitie.Administration[ idAdmin=" + idAdmin + " ]";
     }
     
 }

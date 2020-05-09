@@ -20,7 +20,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -28,65 +27,8 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "bilan")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Bilan.findAll", query = "SELECT b FROM Bilan b")
-    , @NamedQuery(name = "Bilan.findById", query = "SELECT b FROM Bilan b WHERE b.id = :id")
-    , @NamedQuery(name = "Bilan.findByIdCooperative", query = "SELECT b FROM Bilan b WHERE b.idCooperative = :idCooperative")
-    , @NamedQuery(name = "Bilan.findByFraisPreliminaires", query = "SELECT b FROM Bilan b WHERE b.fraisPreliminaires = :fraisPreliminaires")
-    , @NamedQuery(name = "Bilan.findBySubventionsInvestissement", query = "SELECT b FROM Bilan b WHERE b.subventionsInvestissement = :subventionsInvestissement")
-    , @NamedQuery(name = "Bilan.findByTerrains", query = "SELECT b FROM Bilan b WHERE b.terrains = :terrains")
-    , @NamedQuery(name = "Bilan.findByConstructions", query = "SELECT b FROM Bilan b WHERE b.constructions = :constructions")
-    , @NamedQuery(name = "Bilan.findByInstallationsMaterielEtOutillage", query = "SELECT b FROM Bilan b WHERE b.installationsMaterielEtOutillage = :installationsMaterielEtOutillage")
-    , @NamedQuery(name = "Bilan.findByMaterielTransport", query = "SELECT b FROM Bilan b WHERE b.materielTransport = :materielTransport")
-    , @NamedQuery(name = "Bilan.findByAutresImmobilisationsPersonnelles", query = "SELECT b FROM Bilan b WHERE b.autresImmobilisationsPersonnelles = :autresImmobilisationsPersonnelles")
-    , @NamedQuery(name = "Bilan.findByMaterielEtImmobilierBureau", query = "SELECT b FROM Bilan b WHERE b.materielEtImmobilierBureau = :materielEtImmobilierBureau")
-    , @NamedQuery(name = "Bilan.findByTotalImmobilisations", query = "SELECT b FROM Bilan b WHERE b.totalImmobilisations = :totalImmobilisations")
-    , @NamedQuery(name = "Bilan.findByTotalStocks", query = "SELECT b FROM Bilan b WHERE b.totalStocks = :totalStocks")
-    , @NamedQuery(name = "Bilan.findByCreance", query = "SELECT b FROM Bilan b WHERE b.creance = :creance")
-    , @NamedQuery(name = "Bilan.findByBanque", query = "SELECT b FROM Bilan b WHERE b.banque = :banque")
-    , @NamedQuery(name = "Bilan.findByCaisse", query = "SELECT b FROM Bilan b WHERE b.caisse = :caisse")
-    , @NamedQuery(name = "Bilan.findByDateModification", query = "SELECT b FROM Bilan b WHERE b.dateModification = :dateModification")
-    , @NamedQuery(name = "Bilan.findByDateBilan", query = "SELECT b FROM Bilan b WHERE b.dateBilan = :dateBilan")
-    , @NamedQuery(name = "Bilan.findByCapitalActuel", query = "SELECT b FROM Bilan b WHERE b.capitalActuel = :capitalActuel")
-    , @NamedQuery(name = "Bilan.findByReservesLegales", query = "SELECT b FROM Bilan b WHERE b.reservesLegales = :reservesLegales")
-    , @NamedQuery(name = "Bilan.findByAutresReserves", query = "SELECT b FROM Bilan b WHERE b.autresReserves = :autresReserves")
-    , @NamedQuery(name = "Bilan.findByReportAnouveau", query = "SELECT b FROM Bilan b WHERE b.reportAnouveau = :reportAnouveau")
-    , @NamedQuery(name = "Bilan.findByResultatsNetsInstanceApplication", query = "SELECT b FROM Bilan b WHERE b.resultatsNetsInstanceApplication = :resultatsNetsInstanceApplication")
-    , @NamedQuery(name = "Bilan.findByDetteFinancementLongTerme", query = "SELECT b FROM Bilan b WHERE b.detteFinancementLongTerme = :detteFinancementLongTerme")
-    , @NamedQuery(name = "Bilan.findByDetteFinancementCourTerme", query = "SELECT b FROM Bilan b WHERE b.detteFinancementCourTerme = :detteFinancementCourTerme")
-    , @NamedQuery(name = "Bilan.findByFournisseursEtComptesRattaches", query = "SELECT b FROM Bilan b WHERE b.fournisseursEtComptesRattaches = :fournisseursEtComptesRattaches")
-    , @NamedQuery(name = "Bilan.findByPersonnel", query = "SELECT b FROM Bilan b WHERE b.personnel = :personnel")
-    , @NamedQuery(name = "Bilan.findByOrganismesSociaux", query = "SELECT b FROM Bilan b WHERE b.organismesSociaux = :organismesSociaux")
-    , @NamedQuery(name = "Bilan.findByEtat", query = "SELECT b FROM Bilan b WHERE b.etat = :etat")
-    , @NamedQuery(name = "Bilan.findByComptesAssocies", query = "SELECT b FROM Bilan b WHERE b.comptesAssocies = :comptesAssocies")
-    , @NamedQuery(name = "Bilan.findByAutresCreanciers", query = "SELECT b FROM Bilan b WHERE b.autresCreanciers = :autresCreanciers")
-    , @NamedQuery(name = "Bilan.findByChiffreAffaires", query = "SELECT b FROM Bilan b WHERE b.chiffreAffaires = :chiffreAffaires")
-    , @NamedQuery(name = "Bilan.findBySubventionsExploitation", query = "SELECT b FROM Bilan b WHERE b.subventionsExploitation = :subventionsExploitation")
-    , @NamedQuery(name = "Bilan.findByTransfertsDeCharges", query = "SELECT b FROM Bilan b WHERE b.transfertsDeCharges = :transfertsDeCharges")
-    , @NamedQuery(name = "Bilan.findByAchatRevendusMarchandises", query = "SELECT b FROM Bilan b WHERE b.achatRevendusMarchandises = :achatRevendusMarchandises")
-    , @NamedQuery(name = "Bilan.findByAchatsConsommesMatieresEtFournitures", query = "SELECT b FROM Bilan b WHERE b.achatsConsommesMatieresEtFournitures = :achatsConsommesMatieresEtFournitures")
-    , @NamedQuery(name = "Bilan.findByAutresChargesExternes", query = "SELECT b FROM Bilan b WHERE b.autresChargesExternes = :autresChargesExternes")
-    , @NamedQuery(name = "Bilan.findByImpotsEtTaxes", query = "SELECT b FROM Bilan b WHERE b.impotsEtTaxes = :impotsEtTaxes")
-    , @NamedQuery(name = "Bilan.findByTotalAchats", query = "SELECT b FROM Bilan b WHERE b.totalAchats = :totalAchats")
-    , @NamedQuery(name = "Bilan.findByChargesPersonnel", query = "SELECT b FROM Bilan b WHERE b.chargesPersonnel = :chargesPersonnel")
-    , @NamedQuery(name = "Bilan.findByAutresCharges", query = "SELECT b FROM Bilan b WHERE b.autresCharges = :autresCharges")
-    , @NamedQuery(name = "Bilan.findByChargesFinacieres", query = "SELECT b FROM Bilan b WHERE b.chargesFinacieres = :chargesFinacieres")
-    , @NamedQuery(name = "Bilan.findByDotationsExploitations", query = "SELECT b FROM Bilan b WHERE b.dotationsExploitations = :dotationsExploitations")
-    , @NamedQuery(name = "Bilan.findByVenteMarchandisesEnLetat", query = "SELECT b FROM Bilan b WHERE b.venteMarchandisesEnLetat = :venteMarchandisesEnLetat")
-    , @NamedQuery(name = "Bilan.findByEtatAchatRevendusMarchandises", query = "SELECT b FROM Bilan b WHERE b.etatAchatRevendusMarchandises = :etatAchatRevendusMarchandises")
-    , @NamedQuery(name = "Bilan.findByVenteBienEtServicesProduits", query = "SELECT b FROM Bilan b WHERE b.venteBienEtServicesProduits = :venteBienEtServicesProduits")
-    , @NamedQuery(name = "Bilan.findByVariationStockProduits", query = "SELECT b FROM Bilan b WHERE b.variationStockProduits = :variationStockProduits")
-    , @NamedQuery(name = "Bilan.findByImmobilisationsCooperatives", query = "SELECT b FROM Bilan b WHERE b.immobilisationsCooperatives = :immobilisationsCooperatives")
-    , @NamedQuery(name = "Bilan.findByEtatAutresChargesExternes", query = "SELECT b FROM Bilan b WHERE b.etatAutresChargesExternes = :etatAutresChargesExternes")
-    , @NamedQuery(name = "Bilan.findByMargeBruteSurVenteEnLetat", query = "SELECT b FROM Bilan b WHERE b.margeBruteSurVenteEnLetat = :margeBruteSurVenteEnLetat")
-    , @NamedQuery(name = "Bilan.findByProductionExercice", query = "SELECT b FROM Bilan b WHERE b.productionExercice = :productionExercice")
-    , @NamedQuery(name = "Bilan.findByConsommationExercice", query = "SELECT b FROM Bilan b WHERE b.consommationExercice = :consommationExercice")
-    , @NamedQuery(name = "Bilan.findByValeurAjoutee", query = "SELECT b FROM Bilan b WHERE b.valeurAjoutee = :valeurAjoutee")
-    , @NamedQuery(name = "Bilan.findByTotalPassif", query = "SELECT b FROM Bilan b WHERE b.totalPassif = :totalPassif")
-    , @NamedQuery(name = "Bilan.findByTotalActif", query = "SELECT b FROM Bilan b WHERE b.totalActif = :totalActif")
-    , @NamedQuery(name = "Bilan.findByResultat", query = "SELECT b FROM Bilan b WHERE b.resultat = :resultat")
-    , @NamedQuery(name = "Bilan.findByResultatvaleur", query = "SELECT b FROM Bilan b WHERE b.resultatvaleur = :resultatvaleur")})
+    @NamedQuery(name = "Bilan.findAll", query = "SELECT b FROM Bilan b")})
 public class Bilan implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -856,7 +798,7 @@ public class Bilan implements Serializable {
 
     @Override
     public String toString() {
-        return "jpa2.Bilan[ id=" + id + " ]";
+        return "ma.observatoire.entitie.Bilan[ id=" + id + " ]";
     }
     
 }

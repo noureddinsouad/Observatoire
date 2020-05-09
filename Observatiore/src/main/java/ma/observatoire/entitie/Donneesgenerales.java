@@ -20,7 +20,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -28,25 +27,8 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "donneesgenerales")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Donneesgenerales.findAll", query = "SELECT d FROM Donneesgenerales d")
-    , @NamedQuery(name = "Donneesgenerales.findById", query = "SELECT d FROM Donneesgenerales d WHERE d.id = :id")
-    , @NamedQuery(name = "Donneesgenerales.findByIdCooperative", query = "SELECT d FROM Donneesgenerales d WHERE d.idCooperative = :idCooperative")
-    , @NamedQuery(name = "Donneesgenerales.findByAdhrentsTravailleursPermanents", query = "SELECT d FROM Donneesgenerales d WHERE d.adhrentsTravailleursPermanents = :adhrentsTravailleursPermanents")
-    , @NamedQuery(name = "Donneesgenerales.findByAdhrentsTravailleursSaisonniers", query = "SELECT d FROM Donneesgenerales d WHERE d.adhrentsTravailleursSaisonniers = :adhrentsTravailleursSaisonniers")
-    , @NamedQuery(name = "Donneesgenerales.findBySalariesPermanents", query = "SELECT d FROM Donneesgenerales d WHERE d.salariesPermanents = :salariesPermanents")
-    , @NamedQuery(name = "Donneesgenerales.findBySalariesSaisonniers", query = "SELECT d FROM Donneesgenerales d WHERE d.salariesSaisonniers = :salariesSaisonniers")
-    , @NamedQuery(name = "Donneesgenerales.findByFemmesAdherentsTravailleursPermanentes", query = "SELECT d FROM Donneesgenerales d WHERE d.femmesAdherentsTravailleursPermanentes = :femmesAdherentsTravailleursPermanentes")
-    , @NamedQuery(name = "Donneesgenerales.findByFemmesAdherentsTravailleursSaisonnieres", query = "SELECT d FROM Donneesgenerales d WHERE d.femmesAdherentsTravailleursSaisonnieres = :femmesAdherentsTravailleursSaisonnieres")
-    , @NamedQuery(name = "Donneesgenerales.findBySalariesFemmesPermanentes", query = "SELECT d FROM Donneesgenerales d WHERE d.salariesFemmesPermanentes = :salariesFemmesPermanentes")
-    , @NamedQuery(name = "Donneesgenerales.findBySalariesFemmesSaisonnieres", query = "SELECT d FROM Donneesgenerales d WHERE d.salariesFemmesSaisonnieres = :salariesFemmesSaisonnieres")
-    , @NamedQuery(name = "Donneesgenerales.findByTenueReguliereAssemblees", query = "SELECT d FROM Donneesgenerales d WHERE d.tenueReguliereAssemblees = :tenueReguliereAssemblees")
-    , @NamedQuery(name = "Donneesgenerales.findByDerniereAGannuelle", query = "SELECT d FROM Donneesgenerales d WHERE d.derniereAGannuelle = :derniereAGannuelle")
-    , @NamedQuery(name = "Donneesgenerales.findByCommissaireAuxComptes", query = "SELECT d FROM Donneesgenerales d WHERE d.commissaireAuxComptes = :commissaireAuxComptes")
-    , @NamedQuery(name = "Donneesgenerales.findByAdresse", query = "SELECT d FROM Donneesgenerales d WHERE d.adresse = :adresse")
-    , @NamedQuery(name = "Donneesgenerales.findByTel", query = "SELECT d FROM Donneesgenerales d WHERE d.tel = :tel")
-    , @NamedQuery(name = "Donneesgenerales.findByDateModification", query = "SELECT d FROM Donneesgenerales d WHERE d.dateModification = :dateModification")})
+    @NamedQuery(name = "Donneesgenerales.findAll", query = "SELECT d FROM Donneesgenerales d")})
 public class Donneesgenerales implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -297,7 +279,7 @@ public class Donneesgenerales implements Serializable {
 
     @Override
     public String toString() {
-        return "jpa2.Donneesgenerales[ id=" + id + " ]";
+        return "ma.observatoire.entitie.Donneesgenerales[ id=" + id + " ]";
     }
     
 }

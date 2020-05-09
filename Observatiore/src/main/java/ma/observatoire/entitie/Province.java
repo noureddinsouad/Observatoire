@@ -17,7 +17,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -25,12 +24,8 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "province")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Province.findAll", query = "SELECT p FROM Province p")
-    , @NamedQuery(name = "Province.findByIdProvince", query = "SELECT p FROM Province p WHERE p.idProvince = :idProvince")
-    , @NamedQuery(name = "Province.findByIdRegion", query = "SELECT p FROM Province p WHERE p.idRegion = :idRegion")
-    , @NamedQuery(name = "Province.findByProvince", query = "SELECT p FROM Province p WHERE p.province = :province")})
+    @NamedQuery(name = "Province.findAll", query = "SELECT p FROM Province p")})
 public class Province implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -109,7 +104,7 @@ public class Province implements Serializable {
 
     @Override
     public String toString() {
-        return "jpa2.Province[ idProvince=" + idProvince + " ]";
+        return "ma.observatoire.entitie.Province[ idProvince=" + idProvince + " ]";
     }
     
 }

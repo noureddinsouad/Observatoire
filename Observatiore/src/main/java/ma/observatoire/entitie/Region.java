@@ -17,7 +17,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -25,11 +24,8 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "region")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Region.findAll", query = "SELECT r FROM Region r")
-    , @NamedQuery(name = "Region.findByIdRegion", query = "SELECT r FROM Region r WHERE r.idRegion = :idRegion")
-    , @NamedQuery(name = "Region.findByRegion", query = "SELECT r FROM Region r WHERE r.region = :region")})
+    @NamedQuery(name = "Region.findAll", query = "SELECT r FROM Region r")})
 public class Region implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -95,7 +91,7 @@ public class Region implements Serializable {
 
     @Override
     public String toString() {
-        return "jpa2.Region[ idRegion=" + idRegion + " ]";
+        return "ma.observatoire.entitie.Region[ idRegion=" + idRegion + " ]";
     }
     
 }

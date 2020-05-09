@@ -20,7 +20,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -28,23 +27,8 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "cooperative")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Cooperative.findAll", query = "SELECT c FROM Cooperative c")
-    , @NamedQuery(name = "Cooperative.findByIdCooperative", query = "SELECT c FROM Cooperative c WHERE c.idCooperative = :idCooperative")
-    , @NamedQuery(name = "Cooperative.findByNom", query = "SELECT c FROM Cooperative c WHERE c.nom = :nom")
-    , @NamedQuery(name = "Cooperative.findByNumeroTPI", query = "SELECT c FROM Cooperative c WHERE c.numeroTPI = :numeroTPI")
-    , @NamedQuery(name = "Cooperative.findByAdresseActuelle", query = "SELECT c FROM Cooperative c WHERE c.adresseActuelle = :adresseActuelle")
-    , @NamedQuery(name = "Cooperative.findByNombreAdherents", query = "SELECT c FROM Cooperative c WHERE c.nombreAdherents = :nombreAdherents")
-    , @NamedQuery(name = "Cooperative.findByTelephone", query = "SELECT c FROM Cooperative c WHERE c.telephone = :telephone")
-    , @NamedQuery(name = "Cooperative.findBySecteurActivite", query = "SELECT c FROM Cooperative c WHERE c.secteurActivite = :secteurActivite")
-    , @NamedQuery(name = "Cooperative.findByRegion", query = "SELECT c FROM Cooperative c WHERE c.region = :region")
-    , @NamedQuery(name = "Cooperative.findByIdPresident", query = "SELECT c FROM Cooperative c WHERE c.idPresident = :idPresident")
-    , @NamedQuery(name = "Cooperative.findByBranche", query = "SELECT c FROM Cooperative c WHERE c.branche = :branche")
-    , @NamedQuery(name = "Cooperative.findByProvince", query = "SELECT c FROM Cooperative c WHERE c.province = :province")
-    , @NamedQuery(name = "Cooperative.findByFax", query = "SELECT c FROM Cooperative c WHERE c.fax = :fax")
-    , @NamedQuery(name = "Cooperative.findByDateCreation", query = "SELECT c FROM Cooperative c WHERE c.dateCreation = :dateCreation")
-    , @NamedQuery(name = "Cooperative.findByDatedeclaration", query = "SELECT c FROM Cooperative c WHERE c.datedeclaration = :datedeclaration")})
+    @NamedQuery(name = "Cooperative.findAll", query = "SELECT c FROM Cooperative c")})
 public class Cooperative implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -273,7 +257,7 @@ public class Cooperative implements Serializable {
 
     @Override
     public String toString() {
-        return "jpa2.Cooperative[ idCooperative=" + idCooperative + " ]";
+        return "ma.observatoire.entitie.Cooperative[ idCooperative=" + idCooperative + " ]";
     }
     
 }

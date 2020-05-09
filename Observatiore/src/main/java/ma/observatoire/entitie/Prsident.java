@@ -17,7 +17,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -25,15 +24,8 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "prsident")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Prsident.findAll", query = "SELECT p FROM Prsident p")
-    , @NamedQuery(name = "Prsident.findByIdUser", query = "SELECT p FROM Prsident p WHERE p.idUser = :idUser")
-    , @NamedQuery(name = "Prsident.findByUserName", query = "SELECT p FROM Prsident p WHERE p.userName = :userName")
-    , @NamedQuery(name = "Prsident.findByPassword", query = "SELECT p FROM Prsident p WHERE p.password = :password")
-    , @NamedQuery(name = "Prsident.findByActived", query = "SELECT p FROM Prsident p WHERE p.actived = :actived")
-    , @NamedQuery(name = "Prsident.findByNomPresident", query = "SELECT p FROM Prsident p WHERE p.nomPresident = :nomPresident")
-    , @NamedQuery(name = "Prsident.findByTelephonePresident", query = "SELECT p FROM Prsident p WHERE p.telephonePresident = :telephonePresident")})
+    @NamedQuery(name = "Prsident.findAll", query = "SELECT p FROM Prsident p")})
 public class Prsident implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -153,7 +145,7 @@ public class Prsident implements Serializable {
 
     @Override
     public String toString() {
-        return "jpa2.Prsident[ idUser=" + idUser + " ]";
+        return "ma.observatoire.entitie.Prsident[ idUser=" + idUser + " ]";
     }
     
 }

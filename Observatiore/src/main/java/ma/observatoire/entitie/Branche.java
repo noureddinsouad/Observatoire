@@ -17,7 +17,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -25,12 +24,8 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "branche")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Branche.findAll", query = "SELECT b FROM Branche b")
-    , @NamedQuery(name = "Branche.findByIdBranche", query = "SELECT b FROM Branche b WHERE b.idBranche = :idBranche")
-    , @NamedQuery(name = "Branche.findByIdSecteur", query = "SELECT b FROM Branche b WHERE b.idSecteur = :idSecteur")
-    , @NamedQuery(name = "Branche.findByBranche", query = "SELECT b FROM Branche b WHERE b.branche = :branche")})
+    @NamedQuery(name = "Branche.findAll", query = "SELECT b FROM Branche b")})
 public class Branche implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -109,7 +104,7 @@ public class Branche implements Serializable {
 
     @Override
     public String toString() {
-        return "jpa2.Branche[ idBranche=" + idBranche + " ]";
+        return "ma.observatoire.entitie.Branche[ idBranche=" + idBranche + " ]";
     }
     
 }

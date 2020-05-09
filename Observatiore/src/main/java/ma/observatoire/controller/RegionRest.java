@@ -1,4 +1,4 @@
-package ma.observatoire.web;
+package ma.observatoire.controller;
 
 import java.util.List;
 
@@ -12,16 +12,17 @@ import ma.observatoire.dao.IRegionDao;
 import ma.observatoire.entitie.Region;
 
 @RestController
-
+@RequestMapping("/regions")
 public class RegionRest {
 	
 	@Autowired(required=false)
-	public IRegionDao region;
+	private IRegionDao region;
 	
-	@RequestMapping(value="/regions",method=RequestMethod.GET)
+	@RequestMapping(value="/",method=RequestMethod.GET)
 	public List<Region> listRegions()
 	{System.out.println(region==null);
 		return region.findAll();
 	}
+	
 
 }

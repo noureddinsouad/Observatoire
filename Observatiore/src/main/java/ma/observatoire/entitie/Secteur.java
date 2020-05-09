@@ -17,7 +17,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -25,11 +24,8 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "secteur")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Secteur.findAll", query = "SELECT s FROM Secteur s")
-    , @NamedQuery(name = "Secteur.findByIdSecteur", query = "SELECT s FROM Secteur s WHERE s.idSecteur = :idSecteur")
-    , @NamedQuery(name = "Secteur.findBySecteur", query = "SELECT s FROM Secteur s WHERE s.secteur = :secteur")})
+    @NamedQuery(name = "Secteur.findAll", query = "SELECT s FROM Secteur s")})
 public class Secteur implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -95,7 +91,7 @@ public class Secteur implements Serializable {
 
     @Override
     public String toString() {
-        return "jpa2.Secteur[ idSecteur=" + idSecteur + " ]";
+        return "ma.observatoire.entitie.Secteur[ idSecteur=" + idSecteur + " ]";
     }
     
 }

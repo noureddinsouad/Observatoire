@@ -11,6 +11,7 @@ public class ObservatioreApplication {
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ObservatioreApplication.class, args);
+		
 	}
 
 }
