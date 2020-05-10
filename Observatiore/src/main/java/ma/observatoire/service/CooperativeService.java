@@ -29,11 +29,16 @@ public interface CooperativeService {
 	public List<Object[]> CapitalParSecteur();
 	public List<Object[]> CapitalParRegion();
 	
-	public  List<Object[]> EvolutionCreationParRegion(Date date,Date date2 );
-	public  List<Object[]> EvolutionCreationParSecteur(Date date,Date date2 );
+	public  List<Object[]> EvolutionCreationParRegion(int year );
+	public  List<Object[]> EvolutionCreationParSecteur(int year );
 	
-	public  List<Object[]> NombreCooperativesParRegion(Date date);
-	public  List<Object[]> NombreCooperativesParSecteur(Date date);
+	public  List<Object[]> EvolutionCreationParRegion(int year,int month );
+	public  List<Object[]> EvolutionCreationParSecteur(int year , int month);
 	
+	public  List<Object[]> NombreCooperativesParRegion(int  year);
+	public  List<Object[]> NombreCooperativesParSecteur(int  year);
+	
+	public  List<Object[]> NombreCooperativesParRegion(int year,int month );
+	public  List<Object[]> NombreCooperativesParSecteur(int year , int month);
 
 }

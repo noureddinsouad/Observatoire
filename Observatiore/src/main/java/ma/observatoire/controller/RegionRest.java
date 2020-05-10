@@ -23,6 +23,5 @@ public class RegionRest {
 	{System.out.println(region==null);
 		return region.findAll();
 	}
-	
 
 }

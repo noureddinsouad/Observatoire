@@ -32,7 +32,6 @@ public class CooperativeServiceImpl implements CooperativeService {
 	public ArrayList<Object[]> tets() {
 		TypedQuery<Object[]> query = em.createQuery("select c.region, c.idRegion from Region c", Object[].class);
 
-	
 		return (ArrayList<Object[]>) query.getResultList();
 	}
 
@@ -69,156 +68,129 @@ public class CooperativeServiceImpl implements CooperativeService {
 	}
 
 	public ArrayList<Object[]> CooperativeParSecteur() {
-		TypedQuery<Object[]> query = em.createQuery("select COUNT(c) ,c.idSecteur.secteur from Cooperative c group by c.idSecteur", Object[].class);
-		
+		TypedQuery<Object[]> query = em.createQuery(
+				"select COUNT(c) ,c.idSecteur.secteur from Cooperative c group by c.idSecteur", Object[].class);
+
 		return (ArrayList<Object[]>) query.getResultList();
 	}
 
-
-	
-
-	@Override
-	public List<Object[]> NombreAdherentsParRegion() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Object[]> NombreAdherentsParBranche() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Object[]> CapitalParSecteur() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Object[]> CapitalParRegion() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Object[]> EvolutionCreationParRegion(Date date, Date date2) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Object[]> EvolutionCreationParSecteur(Date date, Date date2) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Object[]> NombreCooperativesParRegion(Date date) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Object[]> NombreCooperativesParSecteur(Date date) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
 	public List<Object[]> CooperativeParRegion() {
-		TypedQuery<Object[]> query = em.createQuery("select count(c), c.region.region from Cooperative c GROUP BY c.region",
-				Object[].class);
+		TypedQuery<Object[]> query = em
+				.createQuery("select count(c), c.region.region from Cooperative c GROUP BY c.region", Object[].class);
 		List<Object[]> results = query.getResultList();
 		return results;
 	}
 
 	public List<Object[]> CooperativeParBranche() {
-		TypedQuery<Object[]> query = em.createQuery("select count(c), c.branche.branche from Cooperative c GROUP BY c.branche",
-				Object[].class);
+		TypedQuery<Object[]> query = em.createQuery(
+				"select count(c), c.branche.branche from Cooperative c GROUP BY c.branche", Object[].class);
 		List<Object[]> results = query.getResultList();
 		return results;
 	}
 
 	public List<Object[]> NombreAdherentsParSecteur() {
 		TypedQuery<Object[]> query = em.createQuery(
-				"select SUM(c.nombreAdherents), c.idSecteur.secteur from Cooperative c GROUP BY c.idSecteur", Object[].class);
+				"select SUM(c.nombreAdherents), c.idSecteur.secteur from Cooperative c GROUP BY c.idSecteur",
+				Object[].class);
 		List<Object[]> results = query.getResultList();
 		return results;
 	}
-/*
+
 	public List<Object[]> NombreAdherentsParRegion() {
 		TypedQuery<Object[]> query = em.createQuery(
-				"select SUM(c.nombreAdherents), c.region from Cooperative c GROUP BY c.region", Object[].class);
+				"select SUM(c.nombreAdherents), c.region.region from Cooperative c GROUP BY c.region", Object[].class);
 		List<Object[]> results = query.getResultList();
 		return results;
 	}
 
 	public List<Object[]> NombreAdherentsParBranche() {
 		TypedQuery<Object[]> query = em.createQuery(
-				"select SUM(c.nombreAdherents), c.branche from Cooperative c GROUP BY c.branche", Object[].class);
+				"select SUM(c.nombreAdherents), c.branche.branche from Cooperative c GROUP BY c.branche",
+				Object[].class);
 		List<Object[]> results = query.getResultList();
 		return results;
 	}
 
-	@Override
 	public List<Object[]> CapitalParSecteur() {
 		TypedQuery<Object[]> query = em.createQuery(
-				"select SUM(b.capitalActuel), c.Secteur from Cooperative c,Bilan b WHERE b.Cooperative.idCooperative=c.idCooperative  GROUP BY c.Secteur",
+				"select SUM(b.capitalActuel), b.idCooperative.idSecteur.secteur from Bilan b GROUP BY b.idCooperative.idSecteur",
 				Object[].class);
 		List<Object[]> results = query.getResultList();
 		return results;
 	}
 
-	@Override
 	public List<Object[]> CapitalParRegion() {
 		TypedQuery<Object[]> query = em.createQuery(
-				"select SUM(b.capitalActuel), c.Region from Cooperative c,Bilan b WHERE b.Cooperative.idCooperative=c.idCooperative  GROUP BY c.Region",
+				"select SUM(b.capitalActuel), b.idCooperative.region.region from  Bilan b GROUP BY b.idCooperative.region",
 				Object[].class);
 		List<Object[]> results = query.getResultList();
 		return results;
 	}
 
-	@Override
-	public List<Object[]> EvolutionCreationParRegion(Date date, Date date2) {
+	public List<Object[]> EvolutionCreationParRegion(int year) {
 		TypedQuery<Object[]> query = em.createQuery(
-				"select count(c), c.Region from Cooperative c WHERE c.dateCreation between ?1 and ?2 GROUP BY c.Region",
+				"select count(c), c.region.region from Cooperative c WHERE YEAR(c.dateCreation) = ?1 GROUP BY c.region",
 				Object[].class);
-		query.setParameter(1, date, TemporalType.DATE);
-		query.setParameter(2, date2, TemporalType.DATE);
+		query.setParameter(1, year);
 		List<Object[]> results = query.getResultList();
 		return results;
 	}
 
-	@Override
-	public List<Object[]> EvolutionCreationParSecteur(Date date, Date date2) {
+	public List<Object[]> EvolutionCreationParSecteur(int year) {
 		TypedQuery<Object[]> query = em.createQuery(
-				"select count(c), c.Secteur from Cooperative c WHERE c.dateCreation between ?1 and ?2 GROUP BY c.Secteur",
+				"select count(c), c.idSecteur.secteur from Cooperative c WHERE YEAR(c.dateCreation) = ?1 GROUP BY c.idSecteur",
 				Object[].class);
-		query.setParameter(1, date, TemporalType.DATE);
-		query.setParameter(2, date2, TemporalType.DATE);
+		query.setParameter(1, year);
 		List<Object[]> results = query.getResultList();
 		return results;
 	}
 
-	@Override
-	public List<Object[]> NombreCooperativesParRegion(Date date) {
+	public List<Object[]> EvolutionCreationParRegion(int year, int month) {
 		TypedQuery<Object[]> query = em.createQuery(
-				"select count(c), c.Region from Cooperative c WHERE c.dateCreation> ?1 GROUP BY c.Region",
+				"select count(c), c.region.region from Cooperative c WHERE YEAR(c.dateCreation) = ?1 AND MONTH(c.dateCreation)= ?2 GROUP BY c.region",
 				Object[].class);
-		query.setParameter(1, date, TemporalType.DATE);
+		query.setParameter(1, year);
+		query.setParameter(2,month);
 		List<Object[]> results = query.getResultList();
 		return results;
 	}
 
-	@Override
-	public List<Object[]> NombreCooperativesParSecteur(Date date) {
+	public List<Object[]> EvolutionCreationParSecteur(int year, int month) {
 		TypedQuery<Object[]> query = em.createQuery(
-				"select count(c), c.Secteur from Cooperative c WHERE c.dateCreation> ?1 GROUP BY c.Secteur",
+				"select count(c), c.idSecteur.secteur from Cooperative c WHERE YEAR(c.dateCreation) = ?1 AND MONTH(c.dateCreation)= ?2 GROUP BY c.idSecteur",
 				Object[].class);
-		query.setParameter(1, date, TemporalType.DATE);
+		query.setParameter(1, year);
+		query.setParameter(2,month);
 		List<Object[]> results = query.getResultList();
 		return results;
-	}*/
+	}
+
+	public List<Object[]> NombreCooperativesParRegion(int year) {
+		TypedQuery<Object[]> query = em.createQuery(
+				"select count(c), c.region.region from Cooperative c WHERE YEAR(c.dateCreation)<= ?1 GROUP BY c.Region",
+				Object[].class);
+		query.setParameter(1, year);
+		List<Object[]> results = query.getResultList();
+		return results;
+	}
+
+	public List<Object[]> NombreCooperativesParSecteur(int year) {
+		TypedQuery<Object[]> query = em.createQuery(
+				"select count(c), c.idSecteur.secteur from Cooperative c WHERE YEAR(c.dateCreation)<= ?1 GROUP BY c.idSecteur",
+				Object[].class);
+		query.setParameter(1, year);
+		List<Object[]> results = query.getResultList();
+		return results;
+	}
+
+	public List<Object[]> NombreCooperativesParRegion(int year, int month) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public List<Object[]> NombreCooperativesParSecteur(int year, int month) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
