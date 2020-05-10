@@ -6,14 +6,15 @@
 package ma.observatoire.entitie;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -31,8 +32,8 @@ public class Secteur implements Serializable {
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @NotNull
     @Column(name = "id_secteur")
     private Double idSecteur;
     @Basic(optional = false)
@@ -40,6 +41,10 @@ public class Secteur implements Serializable {
     @Size(min = 1, max = 30)
     @Column(name = "secteur")
     private String secteur;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idSecteur")
+    private List<Branche> brancheList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idSecteur")
+    private List<Cooperative> cooperativeList;
 
     public Secteur() {
     }
@@ -67,6 +72,22 @@ public class Secteur implements Serializable {
 
     public void setSecteur(String secteur) {
         this.secteur = secteur;
+    }
+
+    public List<Branche> getBrancheList() {
+        return brancheList;
+    }
+
+    public void setBrancheList(List<Branche> brancheList) {
+        this.brancheList = brancheList;
+    }
+
+    public List<Cooperative> getCooperativeList() {
+        return cooperativeList;
+    }
+
+    public void setCooperativeList(List<Cooperative> cooperativeList) {
+        this.cooperativeList = cooperativeList;
     }
 
     @Override

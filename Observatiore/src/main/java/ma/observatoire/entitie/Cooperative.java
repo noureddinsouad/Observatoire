@@ -7,14 +7,18 @@ package ma.observatoire.entitie;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -34,63 +38,14 @@ public class Cooperative implements Serializable {
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @NotNull
     @Column(name = "id_cooperative")
     private Double idCooperative;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 30)
-    @Column(name = "nom")
-    private String nom;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "numeroTPI")
-    private double numeroTPI;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "AdresseActuelle")
+    @Size(max = 50)
+    @Column(name = "adresse_actuelle")
     private String adresseActuelle;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "nombreAdherents")
-    private int nombreAdherents;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "Telephone")
-    private int telephone;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "SecteurActivite")
-    private String secteurActivite;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "Region")
-    private String region;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "id_president")
-    private double idPresident;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 30)
-    @Column(name = "branche")
-    private String branche;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 30)
-    @Column(name = "province")
-    private String province;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "Fax")
-    private int fax;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "dateCreation")
+    @Column(name = "date_creation")
     @Temporal(TemporalType.DATE)
     private Date dateCreation;
     @Basic(optional = false)
@@ -98,6 +53,38 @@ public class Cooperative implements Serializable {
     @Column(name = "datedeclaration")
     @Temporal(TemporalType.DATE)
     private Date datedeclaration;
+    @Column(name = "fax")
+    private Integer fax;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 30)
+    @Column(name = "nom")
+    private String nom;
+    @Column(name = "nombre_adherents")
+    private Integer nombreAdherents;
+    @Column(name = "numerotpi")
+    private Double numerotpi;
+    @Column(name = "telephone")
+    private Integer telephone;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCooperative")
+    private List<Bilan> bilanList;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "idCooperative")
+    private Donneesgenerales donneesgenerales;
+    @JoinColumn(name = "branche", referencedColumnName = "id_branche")
+    @ManyToOne(optional = false)
+    private Branche branche;
+    @JoinColumn(name = "id_president", referencedColumnName = "id_user")
+    @ManyToOne(optional = false)
+    private Prsident idPresident;
+    @JoinColumn(name = "id_secteur", referencedColumnName = "id_secteur")
+    @ManyToOne(optional = false)
+    private Secteur idSecteur;
+    @JoinColumn(name = "province", referencedColumnName = "id_province")
+    @ManyToOne(optional = false)
+    private Province province;
+    @JoinColumn(name = "region", referencedColumnName = "id_region")
+    @ManyToOne(optional = false)
+    private Region region;
 
     public Cooperative() {
     }
@@ -106,21 +93,10 @@ public class Cooperative implements Serializable {
         this.idCooperative = idCooperative;
     }
 
-    public Cooperative(Double idCooperative, String nom, double numeroTPI, String adresseActuelle, int nombreAdherents, int telephone, String secteurActivite, String region, double idPresident, String branche, String province, int fax, Date dateCreation, Date datedeclaration) {
+    public Cooperative(Double idCooperative, Date datedeclaration, String nom) {
         this.idCooperative = idCooperative;
-        this.nom = nom;
-        this.numeroTPI = numeroTPI;
-        this.adresseActuelle = adresseActuelle;
-        this.nombreAdherents = nombreAdherents;
-        this.telephone = telephone;
-        this.secteurActivite = secteurActivite;
-        this.region = region;
-        this.idPresident = idPresident;
-        this.branche = branche;
-        this.province = province;
-        this.fax = fax;
-        this.dateCreation = dateCreation;
         this.datedeclaration = datedeclaration;
+        this.nom = nom;
     }
 
     public Double getIdCooperative() {
@@ -131,92 +107,12 @@ public class Cooperative implements Serializable {
         this.idCooperative = idCooperative;
     }
 
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public double getNumeroTPI() {
-        return numeroTPI;
-    }
-
-    public void setNumeroTPI(double numeroTPI) {
-        this.numeroTPI = numeroTPI;
-    }
-
     public String getAdresseActuelle() {
         return adresseActuelle;
     }
 
     public void setAdresseActuelle(String adresseActuelle) {
         this.adresseActuelle = adresseActuelle;
-    }
-
-    public int getNombreAdherents() {
-        return nombreAdherents;
-    }
-
-    public void setNombreAdherents(int nombreAdherents) {
-        this.nombreAdherents = nombreAdherents;
-    }
-
-    public int getTelephone() {
-        return telephone;
-    }
-
-    public void setTelephone(int telephone) {
-        this.telephone = telephone;
-    }
-
-    public String getSecteurActivite() {
-        return secteurActivite;
-    }
-
-    public void setSecteurActivite(String secteurActivite) {
-        this.secteurActivite = secteurActivite;
-    }
-
-    public String getRegion() {
-        return region;
-    }
-
-    public void setRegion(String region) {
-        this.region = region;
-    }
-
-    public double getIdPresident() {
-        return idPresident;
-    }
-
-    public void setIdPresident(double idPresident) {
-        this.idPresident = idPresident;
-    }
-
-    public String getBranche() {
-        return branche;
-    }
-
-    public void setBranche(String branche) {
-        this.branche = branche;
-    }
-
-    public String getProvince() {
-        return province;
-    }
-
-    public void setProvince(String province) {
-        this.province = province;
-    }
-
-    public int getFax() {
-        return fax;
-    }
-
-    public void setFax(int fax) {
-        this.fax = fax;
     }
 
     public Date getDateCreation() {
@@ -233,6 +129,102 @@ public class Cooperative implements Serializable {
 
     public void setDatedeclaration(Date datedeclaration) {
         this.datedeclaration = datedeclaration;
+    }
+
+    public Integer getFax() {
+        return fax;
+    }
+
+    public void setFax(Integer fax) {
+        this.fax = fax;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public Integer getNombreAdherents() {
+        return nombreAdherents;
+    }
+
+    public void setNombreAdherents(Integer nombreAdherents) {
+        this.nombreAdherents = nombreAdherents;
+    }
+
+    public Double getNumerotpi() {
+        return numerotpi;
+    }
+
+    public void setNumerotpi(Double numerotpi) {
+        this.numerotpi = numerotpi;
+    }
+
+    public Integer getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(Integer telephone) {
+        this.telephone = telephone;
+    }
+
+    public List<Bilan> getBilanList() {
+        return bilanList;
+    }
+
+    public void setBilanList(List<Bilan> bilanList) {
+        this.bilanList = bilanList;
+    }
+
+    public Donneesgenerales getDonneesgenerales() {
+        return donneesgenerales;
+    }
+
+    public void setDonneesgenerales(Donneesgenerales donneesgenerales) {
+        this.donneesgenerales = donneesgenerales;
+    }
+
+    public Branche getBranche() {
+        return branche;
+    }
+
+    public void setBranche(Branche branche) {
+        this.branche = branche;
+    }
+
+    public Prsident getIdPresident() {
+        return idPresident;
+    }
+
+    public void setIdPresident(Prsident idPresident) {
+        this.idPresident = idPresident;
+    }
+
+    public Secteur getIdSecteur() {
+        return idSecteur;
+    }
+
+    public void setIdSecteur(Secteur idSecteur) {
+        this.idSecteur = idSecteur;
+    }
+
+    public Province getProvince() {
+        return province;
+    }
+
+    public void setProvince(Province province) {
+        this.province = province;
+    }
+
+    public Region getRegion() {
+        return region;
+    }
+
+    public void setRegion(Region region) {
+        this.region = region;
     }
 
     @Override

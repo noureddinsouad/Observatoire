@@ -29,11 +29,11 @@ public class CooperativeServiceImpl implements CooperativeService {
 		this.cooperativeDao = cooperativeDao;
 	}
 
-	public List<Object[]> tets() {
+	public ArrayList<Object[]> tets() {
 		TypedQuery<Object[]> query = em.createQuery("select c.region, c.idRegion from Region c", Object[].class);
 
-		List<Object[]> results = query.getResultList();
-		return results;
+	
+		return (ArrayList<Object[]>) query.getResultList();
 	}
 
 	public List<Cooperative> list() {
@@ -68,25 +68,73 @@ public class CooperativeServiceImpl implements CooperativeService {
 		return null;
 	}
 
-	public List<Object[]> CooperativeParSecteur() {
-		TypedQuery<Object[]> query = em.createQuery(
-				"select count(c.cooperative), c.Secteur from Cooperative c GROUP BY c.Secteur", Object[].class);
+	public ArrayList<Object[]> CooperativeParSecteur() {
+		TypedQuery<Object[]> query = em.createQuery("select COUNT(c) ,c.idSecteur.secteur from Cooperative c group by c.idSecteur", Object[].class);
+		
+		return (ArrayList<Object[]>) query.getResultList();
+	}
 
-		List<Object[]> results = query.getResultList();
-		return results;
+
+	
+
+	@Override
+	public List<Object[]> NombreAdherentsParRegion() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
+	public List<Object[]> NombreAdherentsParBranche() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Object[]> CapitalParSecteur() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Object[]> CapitalParRegion() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Object[]> EvolutionCreationParRegion(Date date, Date date2) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Object[]> EvolutionCreationParSecteur(Date date, Date date2) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Object[]> NombreCooperativesParRegion(Date date) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Object[]> NombreCooperativesParSecteur(Date date) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 	public List<Object[]> CooperativeParRegion() {
-		TypedQuery<Object[]> query = em.createQuery("select count(c), c.region from Cooperative c GROUP BY c.region",
+		TypedQuery<Object[]> query = em.createQuery("select count(c), c.region.region from Cooperative c GROUP BY c.region",
 				Object[].class);
 		List<Object[]> results = query.getResultList();
 		return results;
 	}
 
-	@Override
 	public List<Object[]> CooperativeParBranche() {
-		TypedQuery<Object[]> query = em.createQuery("select count(c), c.branche from Cooperative c GROUP BY c.branche",
+		TypedQuery<Object[]> query = em.createQuery("select count(c), c.branche.branche from Cooperative c GROUP BY c.branche",
 				Object[].class);
 		List<Object[]> results = query.getResultList();
 		return results;
@@ -94,11 +142,11 @@ public class CooperativeServiceImpl implements CooperativeService {
 
 	public List<Object[]> NombreAdherentsParSecteur() {
 		TypedQuery<Object[]> query = em.createQuery(
-				"select SUM(c.nombreAdherents), c.secteur from Cooperative c GROUP BY c.secteur", Object[].class);
+				"select SUM(c.nombreAdherents), c.idSecteur.secteur from Cooperative c GROUP BY c.idSecteur", Object[].class);
 		List<Object[]> results = query.getResultList();
 		return results;
 	}
-
+/*
 	public List<Object[]> NombreAdherentsParRegion() {
 		TypedQuery<Object[]> query = em.createQuery(
 				"select SUM(c.nombreAdherents), c.region from Cooperative c GROUP BY c.region", Object[].class);
@@ -171,6 +219,6 @@ public class CooperativeServiceImpl implements CooperativeService {
 		query.setParameter(1, date, TemporalType.DATE);
 		List<Object[]> results = query.getResultList();
 		return results;
-	}
+	}*/
 
 }

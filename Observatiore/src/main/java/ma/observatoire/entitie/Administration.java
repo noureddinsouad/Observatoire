@@ -9,8 +9,6 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -31,20 +29,20 @@ public class Administration implements Serializable {
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @NotNull
     @Column(name = "id_admin")
     private Double idAdmin;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
-    @Column(name = "username")
-    private String username;
+    @Column(name = "password")
+    private String password;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
-    @Column(name = "password")
-    private String password;
+    @Column(name = "username")
+    private String username;
 
     public Administration() {
     }
@@ -53,10 +51,10 @@ public class Administration implements Serializable {
         this.idAdmin = idAdmin;
     }
 
-    public Administration(Double idAdmin, String username, String password) {
+    public Administration(Double idAdmin, String password, String username) {
         this.idAdmin = idAdmin;
-        this.username = username;
         this.password = password;
+        this.username = username;
     }
 
     public Double getIdAdmin() {
@@ -67,20 +65,20 @@ public class Administration implements Serializable {
         this.idAdmin = idAdmin;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     @Override

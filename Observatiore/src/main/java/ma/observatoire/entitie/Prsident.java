@@ -6,7 +6,9 @@
 package ma.observatoire.entitie;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -33,18 +36,8 @@ public class Prsident implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idUser")
+    @Column(name = "id_user")
     private Double idUser;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 30)
-    @Column(name = "userName")
-    private String userName;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 20)
-    @Column(name = "password")
-    private String password;
     @Basic(optional = false)
     @NotNull
     @Column(name = "actived")
@@ -52,12 +45,24 @@ public class Prsident implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 30)
-    @Column(name = "NomPresident")
+    @Column(name = "nom_president")
     private String nomPresident;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "TelephonePresident")
+    @Size(min = 1, max = 20)
+    @Column(name = "password")
+    private String password;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "telephone_president")
     private int telephonePresident;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 30)
+    @Column(name = "user_name")
+    private String userName;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPresident")
+    private List<Cooperative> cooperativeList;
 
     public Prsident() {
     }
@@ -66,13 +71,13 @@ public class Prsident implements Serializable {
         this.idUser = idUser;
     }
 
-    public Prsident(Double idUser, String userName, String password, boolean actived, String nomPresident, int telephonePresident) {
+    public Prsident(Double idUser, boolean actived, String nomPresident, String password, int telephonePresident, String userName) {
         this.idUser = idUser;
-        this.userName = userName;
-        this.password = password;
         this.actived = actived;
         this.nomPresident = nomPresident;
+        this.password = password;
         this.telephonePresident = telephonePresident;
+        this.userName = userName;
     }
 
     public Double getIdUser() {
@@ -81,22 +86,6 @@ public class Prsident implements Serializable {
 
     public void setIdUser(Double idUser) {
         this.idUser = idUser;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public boolean getActived() {
@@ -115,12 +104,36 @@ public class Prsident implements Serializable {
         this.nomPresident = nomPresident;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public int getTelephonePresident() {
         return telephonePresident;
     }
 
     public void setTelephonePresident(int telephonePresident) {
         this.telephonePresident = telephonePresident;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public List<Cooperative> getCooperativeList() {
+        return cooperativeList;
+    }
+
+    public void setCooperativeList(List<Cooperative> cooperativeList) {
+        this.cooperativeList = cooperativeList;
     }
 
     @Override

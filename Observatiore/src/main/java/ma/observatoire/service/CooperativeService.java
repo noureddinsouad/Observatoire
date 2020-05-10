@@ -18,7 +18,7 @@ public interface CooperativeService {
 	void delete(long id);
 	
 	public List<Object[]> tets();
-	public List<Object[]> CooperativeParSecteur();
+	public ArrayList<Object[]> CooperativeParSecteur();
 	public List<Object[]> CooperativeParRegion();
 	public List<Object[]> CooperativeParBranche();
 	

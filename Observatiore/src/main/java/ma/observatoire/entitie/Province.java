@@ -6,14 +6,17 @@
 package ma.observatoire.entitie;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -31,19 +34,20 @@ public class Province implements Serializable {
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id_province")
-    private Double idProvince;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_region")
-    private double idRegion;
+    @Column(name = "id_province")
+    private Double idProvince;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 30)
     @Column(name = "province")
     private String province;
+    @JoinColumn(name = "id_region", referencedColumnName = "id_region")
+    @ManyToOne(optional = false)
+    private Region idRegion;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "province")
+    private List<Cooperative> cooperativeList;
 
     public Province() {
     }
@@ -52,9 +56,8 @@ public class Province implements Serializable {
         this.idProvince = idProvince;
     }
 
-    public Province(Double idProvince, double idRegion, String province) {
+    public Province(Double idProvince, String province) {
         this.idProvince = idProvince;
-        this.idRegion = idRegion;
         this.province = province;
     }
 
@@ -66,20 +69,28 @@ public class Province implements Serializable {
         this.idProvince = idProvince;
     }
 
-    public double getIdRegion() {
-        return idRegion;
-    }
-
-    public void setIdRegion(double idRegion) {
-        this.idRegion = idRegion;
-    }
-
     public String getProvince() {
         return province;
     }
 
     public void setProvince(String province) {
         this.province = province;
+    }
+
+    public Region getIdRegion() {
+        return idRegion;
+    }
+
+    public void setIdRegion(Region idRegion) {
+        this.idRegion = idRegion;
+    }
+
+    public List<Cooperative> getCooperativeList() {
+        return cooperativeList;
+    }
+
+    public void setCooperativeList(List<Cooperative> cooperativeList) {
+        this.cooperativeList = cooperativeList;
     }
 
     @Override
