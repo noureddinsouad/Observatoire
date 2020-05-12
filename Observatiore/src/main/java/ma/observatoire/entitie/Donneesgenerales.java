@@ -32,12 +32,11 @@ import javax.validation.constraints.Size;
 public class Donneesgenerales implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "id")
-    private Double id;
+    private Integer id;
     @Column(name = "adhrents_travailleurs_permanents")
     private Integer adhrentsTravailleursPermanents;
     @Column(name = "adhrents_travailleurs_saisonniers")
@@ -79,20 +78,20 @@ public class Donneesgenerales implements Serializable {
     public Donneesgenerales() {
     }
 
-    public Donneesgenerales(Double id) {
+    public Donneesgenerales(Integer id) {
         this.id = id;
     }
 
-    public Donneesgenerales(Double id, Date dateModification) {
+    public Donneesgenerales(Integer id, Date dateModification) {
         this.id = id;
         this.dateModification = dateModification;
     }
 
-    public Double getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Double id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

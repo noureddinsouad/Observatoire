@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ma.observatoire.entitie.Cooperative;
+import ma.observatoire.model.NombreParSectuer;
 import ma.observatoire.service.CooperativeService;
 
 @RestController
@@ -27,9 +28,9 @@ public class CooperativeStatistiqueRest {
 		return (List<Object[]>) cooperativeService.tets();
 	}
 	@RequestMapping(value="/copperatives/secteur",method=RequestMethod.GET)
-	public  ArrayList<Object[]> parSecteur() {
+	public ArrayList<Object[]> parSecteur() {
 		System.out.println(cooperativeService==null);
-		return (ArrayList<Object[]>) cooperativeService.CooperativeParSecteur();
+		return cooperativeService.CooperativeParSecteur();
 	}
 	@RequestMapping(value="/copperatives/region",method=RequestMethod.GET)
 	public  ArrayList<Object[]> parRegion() {

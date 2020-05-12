@@ -14,19 +14,36 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ma.observatoire.dao.BrancheDao;
 import ma.observatoire.dao.ICooperativeDao;
+import ma.observatoire.dao.ProvinceDao;
+import ma.observatoire.dao.RegionDao;
+import ma.observatoire.dao.SecteurDao;
+import ma.observatoire.dao.UserDao;
 import ma.observatoire.entitie.Cooperative;
 import ma.observatoire.entitie.Region;
+import ma.observatoire.model.CooperativeDTO;
 
 @Repository
 public class CooperativeServiceImpl implements CooperativeService {
 	@PersistenceContext
 	private EntityManager em;
 	private ICooperativeDao cooperativeDao;
+	private RegionDao regionDao;
+	private ProvinceDao provinceDao;
+	private BrancheDao brancheDao;
+	private SecteurDao secteurDao;
+	private UserDao userDao;
 
 	@Autowired
-	public CooperativeServiceImpl(ICooperativeDao cooperativeDao) {
+	public CooperativeServiceImpl(ICooperativeDao cooperativeDao, RegionDao regionDao, ProvinceDao provinceDao,
+			BrancheDao brancheDao, SecteurDao secteurDao, UserDao userDao) {
 		this.cooperativeDao = cooperativeDao;
+		this.regionDao = regionDao;
+		this.provinceDao = provinceDao;
+		this.brancheDao = brancheDao;
+		this.secteurDao = secteurDao;
+		this.userDao = userDao;
 	}
 
 	public ArrayList<Object[]> tets() {
@@ -35,15 +52,33 @@ public class CooperativeServiceImpl implements CooperativeService {
 		return (ArrayList<Object[]>) query.getResultList();
 	}
 
+	
+
 	public List<Cooperative> list() {
 		// TODO Auto-generated method stub
 		return cooperativeDao.findAll();
 	}
 
 	@Transactional
-	public Cooperative create(Cooperative cooperative) {
-
-		return cooperativeDao.save(cooperative);
+	public Cooperative create(CooperativeDTO cooperative) {
+        Cooperative newCooperative=new Cooperative();
+        newCooperative.setAdresseActuelle(cooperative.getAdresseActuelle());
+        newCooperative.setIdSecteur(secteurDao.findBySecteur(cooperative.getSecteur()));
+        newCooperative.setBranche(brancheDao.findByBranche(cooperative.getBranche()));
+        java.util.Date date =new java.util.Date();
+        newCooperative.setDateCreation(cooperative.getDateCreation());
+        newCooperative.setDatedeclaration(date);
+        newCooperative.setFax(cooperative.getFax());
+        newCooperative.setIdPresident(userDao.findByuserName("zgutmann"));
+        newCooperative.setTelephone(cooperative.getTelephone());
+        newCooperative.setNom(cooperative.getNom());
+        newCooperative.setNombreAdherents(cooperative.getNombreAdherents());
+        newCooperative.setProvince(provinceDao.findByProvince(cooperative.getProvince()));
+        newCooperative.setRegion(regionDao.findByRegion(cooperative.getRegion()));
+        newCooperative.setNumerotpi(cooperative.getNumerotpi());
+        newCooperative.setIdCooperative(5555);
+        
+		return cooperativeDao.save(newCooperative);
 	}
 
 	public Cooperative read(Double id) {

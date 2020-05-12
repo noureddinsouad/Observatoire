@@ -32,12 +32,11 @@ import javax.validation.constraints.Size;
 public class Branche implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_branche")
-    private Double idBranche;
+    private Integer idBranche;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 30)
@@ -52,20 +51,20 @@ public class Branche implements Serializable {
     public Branche() {
     }
 
-    public Branche(Double idBranche) {
+    public Branche(Integer idBranche) {
         this.idBranche = idBranche;
     }
 
-    public Branche(Double idBranche, String branche) {
+    public Branche(Integer idBranche, String branche) {
         this.idBranche = idBranche;
         this.branche = branche;
     }
 
-    public Double getIdBranche() {
+    public Integer getIdBranche() {
         return idBranche;
     }
 
-    public void setIdBranche(Double idBranche) {
+    public void setIdBranche(Integer idBranche) {
         this.idBranche = idBranche;
     }
 

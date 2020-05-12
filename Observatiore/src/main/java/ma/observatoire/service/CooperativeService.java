@@ -1,15 +1,16 @@
 package ma.observatoire.service;
 
-import java.sql.Date;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import ma.observatoire.entitie.Cooperative;
+import ma.observatoire.model.CooperativeDTO;
 
 public interface CooperativeService {
 	List<Cooperative> list();
 	
-	Cooperative create(Cooperative cooperative);
+	Cooperative create(CooperativeDTO cooperative);
 	
 	Cooperative read(long id);
 	

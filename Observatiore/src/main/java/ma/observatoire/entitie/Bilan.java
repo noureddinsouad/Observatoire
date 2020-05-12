@@ -32,12 +32,12 @@ import javax.validation.constraints.Size;
 public class Bilan implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "id")
-    private Double id;
+    private Integer id;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "achat_revendus_marchandises")
     private Double achatRevendusMarchandises;
     @Column(name = "achats_consommes_matieres_et_fournitures")
@@ -156,15 +156,15 @@ public class Bilan implements Serializable {
     public Bilan() {
     }
 
-    public Bilan(Double id) {
+    public Bilan(Integer id) {
         this.id = id;
     }
 
-    public Double getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Double id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

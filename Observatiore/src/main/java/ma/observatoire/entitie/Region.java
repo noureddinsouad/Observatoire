@@ -30,12 +30,11 @@ import javax.validation.constraints.Size;
 public class Region implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_region")
-    private Double idRegion;
+    private Integer idRegion;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 30)
@@ -49,20 +48,20 @@ public class Region implements Serializable {
     public Region() {
     }
 
-    public Region(Double idRegion) {
+    public Region(Integer idRegion) {
         this.idRegion = idRegion;
     }
 
-    public Region(Double idRegion, String region) {
+    public Region(Integer idRegion, String region) {
         this.idRegion = idRegion;
         this.region = region;
     }
 
-    public Double getIdRegion() {
+    public Integer getIdRegion() {
         return idRegion;
     }
 
-    public void setIdRegion(Double idRegion) {
+    public void setIdRegion(Integer idRegion) {
         this.idRegion = idRegion;
     }
 

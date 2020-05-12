@@ -1,12 +1,14 @@
 package ma.observatoire.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import ma.observatoire.entitie.Cooperative;
+import ma.observatoire.model.CooperativeDTO;
 import ma.observatoire.service.CooperativeService;
 
 @RestController
@@ -18,12 +20,16 @@ public class CooperativeController {
 		this.cooperativeService = cooperativeService;
 	}
 	@RequestMapping( value = "/", method = RequestMethod.POST )
-	public Cooperative create(@RequestBody Cooperative cooperative){
+	public Cooperative create(@RequestBody CooperativeDTO cooperative){
+		System.out.println(cooperativeService);
 		return cooperativeService.create(cooperative);
 	}
 	/*@RequestMapping( value = "/{id}", method = RequestMethod.PUT )
 	public Post update(@PathVariable(value="id") long id, @RequestBody Post post){
-		return postService.update(id,post);
+		return postService.update(id,post);	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	public ResponseEntity<?> saveUser(@RequestBody UserDTO user) throws Exception {
+		return ResponseEntity.ok(userDetailsService.save(user));
+	}
 	}*/
 	
 	

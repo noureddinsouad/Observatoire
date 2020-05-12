@@ -32,16 +32,13 @@ import javax.validation.constraints.Size;
 public class Prsident implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id_user")
-    private Double idUser;
-    @Basic(optional = false)
-    @NotNull
+    private Integer idUser;
     @Column(name = "actived")
-    private boolean actived;
+    private Boolean actived;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 30)
@@ -49,7 +46,7 @@ public class Prsident implements Serializable {
     private String nomPresident;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 20)
+    @Size(min = 1, max = 100)
     @Column(name = "password")
     private String password;
     @Basic(optional = false)
@@ -67,32 +64,31 @@ public class Prsident implements Serializable {
     public Prsident() {
     }
 
-    public Prsident(Double idUser) {
+    public Prsident(Integer idUser) {
         this.idUser = idUser;
     }
 
-    public Prsident(Double idUser, boolean actived, String nomPresident, String password, int telephonePresident, String userName) {
+    public Prsident(Integer idUser, String nomPresident, String password, int telephonePresident, String userName) {
         this.idUser = idUser;
-        this.actived = actived;
         this.nomPresident = nomPresident;
         this.password = password;
         this.telephonePresident = telephonePresident;
         this.userName = userName;
     }
 
-    public Double getIdUser() {
+    public Integer getIdUser() {
         return idUser;
     }
 
-    public void setIdUser(Double idUser) {
+    public void setIdUser(Integer idUser) {
         this.idUser = idUser;
     }
 
-    public boolean getActived() {
+    public Boolean getActived() {
         return actived;
     }
 
-    public void setActived(boolean actived) {
+    public void setActived(Boolean actived) {
         this.actived = actived;
     }
 

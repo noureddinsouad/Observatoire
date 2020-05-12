@@ -12,6 +12,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -36,12 +38,11 @@ import javax.validation.constraints.Size;
 public class Cooperative implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_cooperative")
-    private Double idCooperative;
+    private Integer idCooperative;
     @Size(max = 50)
     @Column(name = "adresse_actuelle")
     private String adresseActuelle;
@@ -62,6 +63,7 @@ public class Cooperative implements Serializable {
     private String nom;
     @Column(name = "nombre_adherents")
     private Integer nombreAdherents;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "numerotpi")
     private Double numerotpi;
     @Column(name = "telephone")
@@ -89,21 +91,21 @@ public class Cooperative implements Serializable {
     public Cooperative() {
     }
 
-    public Cooperative(Double idCooperative) {
+    public Cooperative(Integer idCooperative) {
         this.idCooperative = idCooperative;
     }
 
-    public Cooperative(Double idCooperative, Date datedeclaration, String nom) {
+    public Cooperative(Integer idCooperative, Date datedeclaration, String nom) {
         this.idCooperative = idCooperative;
         this.datedeclaration = datedeclaration;
         this.nom = nom;
     }
 
-    public Double getIdCooperative() {
+    public Integer getIdCooperative() {
         return idCooperative;
     }
 
-    public void setIdCooperative(Double idCooperative) {
+    public void setIdCooperative(Integer idCooperative) {
         this.idCooperative = idCooperative;
     }
 

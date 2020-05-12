@@ -27,12 +27,11 @@ import javax.validation.constraints.Size;
 public class Administration implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_admin")
-    private Double idAdmin;
+    private Integer idAdmin;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
@@ -47,21 +46,21 @@ public class Administration implements Serializable {
     public Administration() {
     }
 
-    public Administration(Double idAdmin) {
+    public Administration(Integer idAdmin) {
         this.idAdmin = idAdmin;
     }
 
-    public Administration(Double idAdmin, String password, String username) {
+    public Administration(Integer idAdmin, String password, String username) {
         this.idAdmin = idAdmin;
         this.password = password;
         this.username = username;
     }
 
-    public Double getIdAdmin() {
+    public Integer getIdAdmin() {
         return idAdmin;
     }
 
-    public void setIdAdmin(Double idAdmin) {
+    public void setIdAdmin(Integer idAdmin) {
         this.idAdmin = idAdmin;
     }
 
