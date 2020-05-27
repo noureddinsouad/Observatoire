@@ -39,8 +39,8 @@ public class Cooperative implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "id_cooperative")
     private Integer idCooperative;
     @Size(max = 50)

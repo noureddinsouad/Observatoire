@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ma.observatoire.config.JwtRequestFilter;
 import ma.observatoire.dao.BrancheDao;
 import ma.observatoire.dao.ICooperativeDao;
 import ma.observatoire.dao.ProvinceDao;
@@ -34,16 +35,18 @@ public class CooperativeServiceImpl implements CooperativeService {
 	private BrancheDao brancheDao;
 	private SecteurDao secteurDao;
 	private UserDao userDao;
+	private JwtRequestFilter jwtRequestFilter;
 
 	@Autowired
 	public CooperativeServiceImpl(ICooperativeDao cooperativeDao, RegionDao regionDao, ProvinceDao provinceDao,
-			BrancheDao brancheDao, SecteurDao secteurDao, UserDao userDao) {
+			BrancheDao brancheDao, SecteurDao secteurDao, UserDao userDao,JwtRequestFilter jwtRequestFilter) {
 		this.cooperativeDao = cooperativeDao;
 		this.regionDao = regionDao;
 		this.provinceDao = provinceDao;
 		this.brancheDao = brancheDao;
 		this.secteurDao = secteurDao;
 		this.userDao = userDao;
+		this.jwtRequestFilter=jwtRequestFilter;
 	}
 
 	public ArrayList<Object[]> tets() {
@@ -69,14 +72,14 @@ public class CooperativeServiceImpl implements CooperativeService {
         newCooperative.setDateCreation(cooperative.getDateCreation());
         newCooperative.setDatedeclaration(date);
         newCooperative.setFax(cooperative.getFax());
-        newCooperative.setIdPresident(userDao.findByuserName("zgutmann"));
+        newCooperative.setIdPresident(userDao.findByuserName(jwtRequestFilter.getUsername()));
         newCooperative.setTelephone(cooperative.getTelephone());
         newCooperative.setNom(cooperative.getNom());
         newCooperative.setNombreAdherents(cooperative.getNombreAdherents());
         newCooperative.setProvince(provinceDao.findByProvince(cooperative.getProvince()));
         newCooperative.setRegion(regionDao.findByRegion(cooperative.getRegion()));
         newCooperative.setNumerotpi(cooperative.getNumerotpi());
-        newCooperative.setIdCooperative(5555);
+       //newCooperative.setIdCooperative(56555);
         
 		return cooperativeDao.save(newCooperative);
 	}

@@ -43,13 +43,15 @@ public class JwtAuthenticationController {
 				.loadUserByUsername(authenticationRequest.getUsername());
 
 		final String token = jwtTokenUtil.generateToken(userDetails);
+		
 
 		return ResponseEntity.ok(new JwtResponse(token));
 	}
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ResponseEntity<?> saveUser(@RequestBody UserDTO user) throws Exception {
-		return ResponseEntity.ok(userDetailsService.save(user));
+		userDetailsService.save(user);
+		return ResponseEntity.ok("ok");
 	}
 
 	private void authenticate(String username, String password) throws Exception {

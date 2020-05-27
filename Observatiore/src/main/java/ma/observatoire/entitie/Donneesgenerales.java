@@ -10,6 +10,8 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
@@ -33,8 +35,8 @@ public class Donneesgenerales implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "id")
     private Integer id;
     @Column(name = "adhrents_travailleurs_permanents")
@@ -81,8 +83,32 @@ public class Donneesgenerales implements Serializable {
     public Donneesgenerales(Integer id) {
         this.id = id;
     }
+    
 
-    public Donneesgenerales(Integer id, Date dateModification) {
+    public Donneesgenerales(Integer adhrentsTravailleursPermanents, Integer adhrentsTravailleursSaisonniers,
+			@Size(max = 50) String adresse, @Size(max = 20) String commissaireAuxComptes,
+			@NotNull Date dateModification, Date derniereagannuelle, Integer femmesAdherentsTravailleursPermanentes,
+			Integer femmesAdherentsTravailleursSaisonnieres, Integer salariesFemmesPermanentes,
+			Integer salariesFemmesSaisonnieres, Integer salariesPermanents, Integer salariesSaisonniers, Integer tel,
+			Boolean tenueReguliereAssemblees) {
+		super();
+		this.adhrentsTravailleursPermanents = adhrentsTravailleursPermanents;
+		this.adhrentsTravailleursSaisonniers = adhrentsTravailleursSaisonniers;
+		this.adresse = adresse;
+		this.commissaireAuxComptes = commissaireAuxComptes;
+		this.dateModification = dateModification;
+		this.derniereagannuelle = derniereagannuelle;
+		this.femmesAdherentsTravailleursPermanentes = femmesAdherentsTravailleursPermanentes;
+		this.femmesAdherentsTravailleursSaisonnieres = femmesAdherentsTravailleursSaisonnieres;
+		this.salariesFemmesPermanentes = salariesFemmesPermanentes;
+		this.salariesFemmesSaisonnieres = salariesFemmesSaisonnieres;
+		this.salariesPermanents = salariesPermanents;
+		this.salariesSaisonniers = salariesSaisonniers;
+		this.tel = tel;
+		this.tenueReguliereAssemblees = tenueReguliereAssemblees;
+	}
+
+	public Donneesgenerales(Integer id, Date dateModification) {
         this.id = id;
         this.dateModification = dateModification;
     }

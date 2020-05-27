@@ -10,6 +10,8 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,7 +20,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -33,8 +34,8 @@ public class Bilan implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "id")
     private Integer id;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
@@ -160,7 +161,81 @@ public class Bilan implements Serializable {
         this.id = id;
     }
 
-    public Integer getId() {
+    public Bilan(Double achatRevendusMarchandises, Double achatsConsommesMatieresEtFournitures, Double autresCharges,
+			Double autresChargesExternes, Double autresCreanciers, Double autresImmobilisationsPersonnelles,
+			Double autresReserves, Double banque, Double caisse, Double capitalActuel, Double chargesFinacieres,
+			Double chargesPersonnel, Double chiffreAffaires, Double comptesAssocies, Double consommationExercice,
+			Double constructions, Double creance, Date dateBilan, Date dateModification,
+			Double detteFinancementCourTerme, Double detteFinancementLongTerme, Double dotationsExploitations,
+			Double etat, Double etatAchatRevendusMarchandises, Double etatAutresChargesExternes,
+			Double fournisseursEtComptesRattaches, Double fraisPreliminaires, Double immobilisationsCooperatives,
+			Double impotsEtTaxes, Double installationsMaterielEtOutillage, Double margeBruteSurVenteEnLetat,
+			Double materielEtImmobilierBureau, Double materielTransport, Double organismesSociaux, Double personnel,
+			Double productionExercice, Double reportAnouveau, Double reservesLegales, @Size(max = 10) String resultat,
+			Double resultatsNetsInstanceApplication, Double resultatValeur, Double subventionsExploitation,
+			Double subventionsInvestissement, Double terrains, Double totalAchats, Double totalActif,
+			Double totalImmobilisations, Double totalPassif, Double totalStocks, Double transfertsDeCharges,
+			Double valeurAjoutee, Double variationStockProduits, Double venteBienEtServicesProduits,
+			Double venteMarchandisesEnLetat) {
+		//super();
+		this.achatRevendusMarchandises = achatRevendusMarchandises;
+		this.achatsConsommesMatieresEtFournitures = achatsConsommesMatieresEtFournitures;
+		this.autresCharges = autresCharges;
+		this.autresChargesExternes = autresChargesExternes;
+		this.autresCreanciers = autresCreanciers;
+		this.autresImmobilisationsPersonnelles = autresImmobilisationsPersonnelles;
+		this.autresReserves = autresReserves;
+		this.banque = banque;
+		this.caisse = caisse;
+		this.capitalActuel = capitalActuel;
+		this.chargesFinacieres = chargesFinacieres;
+		this.chargesPersonnel = chargesPersonnel;
+		this.chiffreAffaires = chiffreAffaires;
+		this.comptesAssocies = comptesAssocies;
+		this.consommationExercice = consommationExercice;
+		this.constructions = constructions;
+		this.creance = creance;
+		this.dateBilan = dateBilan;
+		this.dateModification = dateModification;
+		this.detteFinancementCourTerme = detteFinancementCourTerme;
+		this.detteFinancementLongTerme = detteFinancementLongTerme;
+		this.dotationsExploitations = dotationsExploitations;
+		this.etat = etat;
+		this.etatAchatRevendusMarchandises = etatAchatRevendusMarchandises;
+		this.etatAutresChargesExternes = etatAutresChargesExternes;
+		this.fournisseursEtComptesRattaches = fournisseursEtComptesRattaches;
+		this.fraisPreliminaires = fraisPreliminaires;
+		this.immobilisationsCooperatives = immobilisationsCooperatives;
+		this.impotsEtTaxes = impotsEtTaxes;
+		this.installationsMaterielEtOutillage = installationsMaterielEtOutillage;
+		this.margeBruteSurVenteEnLetat = margeBruteSurVenteEnLetat;
+		this.materielEtImmobilierBureau = materielEtImmobilierBureau;
+		this.materielTransport = materielTransport;
+		this.organismesSociaux = organismesSociaux;
+		this.personnel = personnel;
+		this.productionExercice = productionExercice;
+		this.reportAnouveau = reportAnouveau;
+		this.reservesLegales = reservesLegales;
+		this.resultat = resultat;
+		this.resultatsNetsInstanceApplication = resultatsNetsInstanceApplication;
+		this.resultatValeur = resultatValeur;
+		this.subventionsExploitation = subventionsExploitation;
+		this.subventionsInvestissement = subventionsInvestissement;
+		this.terrains = terrains;
+		this.totalAchats = totalAchats;
+		this.totalActif = totalActif;
+		this.totalImmobilisations = totalImmobilisations;
+		this.totalPassif = totalPassif;
+		this.totalStocks = totalStocks;
+		this.transfertsDeCharges = transfertsDeCharges;
+		this.valeurAjoutee = valeurAjoutee;
+		this.variationStockProduits = variationStockProduits;
+		this.venteBienEtServicesProduits = venteBienEtServicesProduits;
+		this.venteMarchandisesEnLetat = venteMarchandisesEnLetat;
+		
+	}
+
+	public Integer getId() {
         return id;
     }
 
