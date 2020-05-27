@@ -9,8 +9,6 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -29,50 +27,41 @@ import javax.validation.constraints.Size;
 public class Administration implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id_admin")
-    private Double idAdmin;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 20)
-    @Column(name = "username")
-    private String username;
+    @Column(name = "id_admin")
+    private Integer idAdmin;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
     @Column(name = "password")
     private String password;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 20)
+    @Column(name = "username")
+    private String username;
 
     public Administration() {
     }
 
-    public Administration(Double idAdmin) {
+    public Administration(Integer idAdmin) {
         this.idAdmin = idAdmin;
     }
 
-    public Administration(Double idAdmin, String username, String password) {
+    public Administration(Integer idAdmin, String password, String username) {
         this.idAdmin = idAdmin;
-        this.username = username;
         this.password = password;
+        this.username = username;
     }
 
-    public Double getIdAdmin() {
+    public Integer getIdAdmin() {
         return idAdmin;
     }
 
-    public void setIdAdmin(Double idAdmin) {
+    public void setIdAdmin(Integer idAdmin) {
         this.idAdmin = idAdmin;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getPassword() {
@@ -81,6 +70,14 @@ public class Administration implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     @Override

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 
-import ma.observatoire.dao.IRegionDao;
+import ma.observatoire.dao.RegionDao;
 import ma.observatoire.entitie.Region;
 
 @RestController
@@ -16,13 +16,12 @@ import ma.observatoire.entitie.Region;
 public class RegionRest {
 	
 	@Autowired(required=false)
-	private IRegionDao region;
+	private RegionDao region;
 	
 	@RequestMapping(value="/",method=RequestMethod.GET)
 	public List<Region> listRegions()
 	{System.out.println(region==null);
 		return region.findAll();
 	}
-	
 
 }

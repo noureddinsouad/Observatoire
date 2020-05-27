@@ -6,14 +6,17 @@
 package ma.observatoire.entitie;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -29,49 +32,40 @@ import javax.validation.constraints.Size;
 public class Branche implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id_branche")
-    private Double idBranche;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_secteur")
-    private double idSecteur;
+    @Column(name = "id_branche")
+    private Integer idBranche;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 30)
     @Column(name = "branche")
     private String branche;
+    @JoinColumn(name = "id_secteur", referencedColumnName = "id_secteur")
+    @ManyToOne(optional = false)
+    private Secteur idSecteur;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "branche")
+    private List<Cooperative> cooperativeList;
 
     public Branche() {
     }
 
-    public Branche(Double idBranche) {
+    public Branche(Integer idBranche) {
         this.idBranche = idBranche;
     }
 
-    public Branche(Double idBranche, double idSecteur, String branche) {
+    public Branche(Integer idBranche, String branche) {
         this.idBranche = idBranche;
-        this.idSecteur = idSecteur;
         this.branche = branche;
     }
 
-    public Double getIdBranche() {
+    public Integer getIdBranche() {
         return idBranche;
     }
 
-    public void setIdBranche(Double idBranche) {
+    public void setIdBranche(Integer idBranche) {
         this.idBranche = idBranche;
-    }
-
-    public double getIdSecteur() {
-        return idSecteur;
-    }
-
-    public void setIdSecteur(double idSecteur) {
-        this.idSecteur = idSecteur;
     }
 
     public String getBranche() {
@@ -80,6 +74,22 @@ public class Branche implements Serializable {
 
     public void setBranche(String branche) {
         this.branche = branche;
+    }
+
+    public Secteur getIdSecteur() {
+        return idSecteur;
+    }
+
+    public void setIdSecteur(Secteur idSecteur) {
+        this.idSecteur = idSecteur;
+    }
+
+    public List<Cooperative> getCooperativeList() {
+        return cooperativeList;
+    }
+
+    public void setCooperativeList(List<Cooperative> cooperativeList) {
+        this.cooperativeList = cooperativeList;
     }
 
     @Override

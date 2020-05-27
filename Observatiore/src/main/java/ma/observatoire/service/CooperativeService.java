@@ -1,15 +1,16 @@
 package ma.observatoire.service;
 
-import java.sql.Date;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import ma.observatoire.entitie.Cooperative;
+import ma.observatoire.model.CooperativeDTO;
 
 public interface CooperativeService {
 	List<Cooperative> list();
 	
-	Cooperative create(Cooperative cooperative);
+	Cooperative create(CooperativeDTO cooperative);
 	
 	Cooperative read(long id);
 	
@@ -18,7 +19,7 @@ public interface CooperativeService {
 	void delete(long id);
 	
 	public List<Object[]> tets();
-	public List<Object[]> CooperativeParSecteur();
+	public ArrayList<Object[]> CooperativeParSecteur();
 	public List<Object[]> CooperativeParRegion();
 	public List<Object[]> CooperativeParBranche();
 	
@@ -29,11 +30,16 @@ public interface CooperativeService {
 	public List<Object[]> CapitalParSecteur();
 	public List<Object[]> CapitalParRegion();
 	
-	public  List<Object[]> EvolutionCreationParRegion(Date date,Date date2 );
-	public  List<Object[]> EvolutionCreationParSecteur(Date date,Date date2 );
+	public  List<Object[]> EvolutionCreationParRegion(int year );
+	public  List<Object[]> EvolutionCreationParSecteur(int year );
 	
-	public  List<Object[]> NombreCooperativesParRegion(Date date);
-	public  List<Object[]> NombreCooperativesParSecteur(Date date);
+	public  List<Object[]> EvolutionCreationParRegion(int year,int month );
+	public  List<Object[]> EvolutionCreationParSecteur(int year , int month);
 	
+	public  List<Object[]> NombreCooperativesParRegion(int  year);
+	public  List<Object[]> NombreCooperativesParSecteur(int  year);
+	
+	public  List<Object[]> NombreCooperativesParRegion(int year,int month );
+	public  List<Object[]> NombreCooperativesParSecteur(int year , int month);
 
 }

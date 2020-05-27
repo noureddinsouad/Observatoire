@@ -13,8 +13,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -32,205 +34,107 @@ import javax.validation.constraints.Size;
 public class Donneesgenerales implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Double id;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "id_cooperative")
-    private double idCooperative;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "AdhrentsTravailleursPermanents")
-    private int adhrentsTravailleursPermanents;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "AdhrentsTravailleursSaisonniers")
-    private int adhrentsTravailleursSaisonniers;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "SalariesPermanents")
-    private int salariesPermanents;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "SalariesSaisonniers")
-    private int salariesSaisonniers;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "FemmesAdherentsTravailleursPermanentes")
-    private int femmesAdherentsTravailleursPermanentes;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "FemmesAdherentsTravailleursSaisonnieres")
-    private int femmesAdherentsTravailleursSaisonnieres;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "SalariesFemmesPermanentes")
-    private int salariesFemmesPermanentes;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "SalariesFemmesSaisonnieres")
-    private int salariesFemmesSaisonnieres;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "TenueReguliereAssemblees")
-    private boolean tenueReguliereAssemblees;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "DerniereAGannuelle")
-    @Temporal(TemporalType.DATE)
-    private Date derniereAGannuelle;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 20)
-    @Column(name = "CommissaireAuxComptes")
+    private Integer id;
+    @Column(name = "adhrents_travailleurs_permanents")
+    private Integer adhrentsTravailleursPermanents;
+    @Column(name = "adhrents_travailleurs_saisonniers")
+    private Integer adhrentsTravailleursSaisonniers;
+    @Size(max = 50)
+    @Column(name = "adresse")
+    private String adresse;
+    @Size(max = 20)
+    @Column(name = "commissaire_aux_comptes")
     private String commissaireAuxComptes;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "Adresse")
-    private String adresse;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "tel")
-    private int tel;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "dateModification")
+    @Column(name = "date_modification")
     @Temporal(TemporalType.DATE)
     private Date dateModification;
+    @Column(name = "derniereagannuelle")
+    @Temporal(TemporalType.DATE)
+    private Date derniereagannuelle;
+    @Column(name = "femmes_adherents_travailleurs_permanentes")
+    private Integer femmesAdherentsTravailleursPermanentes;
+    @Column(name = "femmes_adherents_travailleurs_saisonnieres")
+    private Integer femmesAdherentsTravailleursSaisonnieres;
+    @Column(name = "salaries_femmes_permanentes")
+    private Integer salariesFemmesPermanentes;
+    @Column(name = "salaries_femmes_saisonnieres")
+    private Integer salariesFemmesSaisonnieres;
+    @Column(name = "salaries_permanents")
+    private Integer salariesPermanents;
+    @Column(name = "salaries_saisonniers")
+    private Integer salariesSaisonniers;
+    @Column(name = "tel")
+    private Integer tel;
+    @Column(name = "tenue_reguliere_assemblees")
+    private Boolean tenueReguliereAssemblees;
+    @JoinColumn(name = "id_cooperative", referencedColumnName = "id_cooperative")
+    @OneToOne(optional = false)
+    private Cooperative idCooperative;
 
     public Donneesgenerales() {
     }
 
-    public Donneesgenerales(Double id) {
+    public Donneesgenerales(Integer id) {
         this.id = id;
     }
+    
 
-    public Donneesgenerales(Double id, double idCooperative, int adhrentsTravailleursPermanents, int adhrentsTravailleursSaisonniers, int salariesPermanents, int salariesSaisonniers, int femmesAdherentsTravailleursPermanentes, int femmesAdherentsTravailleursSaisonnieres, int salariesFemmesPermanentes, int salariesFemmesSaisonnieres, boolean tenueReguliereAssemblees, Date derniereAGannuelle, String commissaireAuxComptes, String adresse, int tel, Date dateModification) {
+    public Donneesgenerales(Integer adhrentsTravailleursPermanents, Integer adhrentsTravailleursSaisonniers,
+			@Size(max = 50) String adresse, @Size(max = 20) String commissaireAuxComptes,
+			@NotNull Date dateModification, Date derniereagannuelle, Integer femmesAdherentsTravailleursPermanentes,
+			Integer femmesAdherentsTravailleursSaisonnieres, Integer salariesFemmesPermanentes,
+			Integer salariesFemmesSaisonnieres, Integer salariesPermanents, Integer salariesSaisonniers, Integer tel,
+			Boolean tenueReguliereAssemblees) {
+		super();
+		this.adhrentsTravailleursPermanents = adhrentsTravailleursPermanents;
+		this.adhrentsTravailleursSaisonniers = adhrentsTravailleursSaisonniers;
+		this.adresse = adresse;
+		this.commissaireAuxComptes = commissaireAuxComptes;
+		this.dateModification = dateModification;
+		this.derniereagannuelle = derniereagannuelle;
+		this.femmesAdherentsTravailleursPermanentes = femmesAdherentsTravailleursPermanentes;
+		this.femmesAdherentsTravailleursSaisonnieres = femmesAdherentsTravailleursSaisonnieres;
+		this.salariesFemmesPermanentes = salariesFemmesPermanentes;
+		this.salariesFemmesSaisonnieres = salariesFemmesSaisonnieres;
+		this.salariesPermanents = salariesPermanents;
+		this.salariesSaisonniers = salariesSaisonniers;
+		this.tel = tel;
+		this.tenueReguliereAssemblees = tenueReguliereAssemblees;
+	}
+
+	public Donneesgenerales(Integer id, Date dateModification) {
         this.id = id;
-        this.idCooperative = idCooperative;
-        this.adhrentsTravailleursPermanents = adhrentsTravailleursPermanents;
-        this.adhrentsTravailleursSaisonniers = adhrentsTravailleursSaisonniers;
-        this.salariesPermanents = salariesPermanents;
-        this.salariesSaisonniers = salariesSaisonniers;
-        this.femmesAdherentsTravailleursPermanentes = femmesAdherentsTravailleursPermanentes;
-        this.femmesAdherentsTravailleursSaisonnieres = femmesAdherentsTravailleursSaisonnieres;
-        this.salariesFemmesPermanentes = salariesFemmesPermanentes;
-        this.salariesFemmesSaisonnieres = salariesFemmesSaisonnieres;
-        this.tenueReguliereAssemblees = tenueReguliereAssemblees;
-        this.derniereAGannuelle = derniereAGannuelle;
-        this.commissaireAuxComptes = commissaireAuxComptes;
-        this.adresse = adresse;
-        this.tel = tel;
         this.dateModification = dateModification;
     }
 
-    public Double getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Double id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public double getIdCooperative() {
-        return idCooperative;
-    }
-
-    public void setIdCooperative(double idCooperative) {
-        this.idCooperative = idCooperative;
-    }
-
-    public int getAdhrentsTravailleursPermanents() {
+    public Integer getAdhrentsTravailleursPermanents() {
         return adhrentsTravailleursPermanents;
     }
 
-    public void setAdhrentsTravailleursPermanents(int adhrentsTravailleursPermanents) {
+    public void setAdhrentsTravailleursPermanents(Integer adhrentsTravailleursPermanents) {
         this.adhrentsTravailleursPermanents = adhrentsTravailleursPermanents;
     }
 
-    public int getAdhrentsTravailleursSaisonniers() {
+    public Integer getAdhrentsTravailleursSaisonniers() {
         return adhrentsTravailleursSaisonniers;
     }
 
-    public void setAdhrentsTravailleursSaisonniers(int adhrentsTravailleursSaisonniers) {
+    public void setAdhrentsTravailleursSaisonniers(Integer adhrentsTravailleursSaisonniers) {
         this.adhrentsTravailleursSaisonniers = adhrentsTravailleursSaisonniers;
-    }
-
-    public int getSalariesPermanents() {
-        return salariesPermanents;
-    }
-
-    public void setSalariesPermanents(int salariesPermanents) {
-        this.salariesPermanents = salariesPermanents;
-    }
-
-    public int getSalariesSaisonniers() {
-        return salariesSaisonniers;
-    }
-
-    public void setSalariesSaisonniers(int salariesSaisonniers) {
-        this.salariesSaisonniers = salariesSaisonniers;
-    }
-
-    public int getFemmesAdherentsTravailleursPermanentes() {
-        return femmesAdherentsTravailleursPermanentes;
-    }
-
-    public void setFemmesAdherentsTravailleursPermanentes(int femmesAdherentsTravailleursPermanentes) {
-        this.femmesAdherentsTravailleursPermanentes = femmesAdherentsTravailleursPermanentes;
-    }
-
-    public int getFemmesAdherentsTravailleursSaisonnieres() {
-        return femmesAdherentsTravailleursSaisonnieres;
-    }
-
-    public void setFemmesAdherentsTravailleursSaisonnieres(int femmesAdherentsTravailleursSaisonnieres) {
-        this.femmesAdherentsTravailleursSaisonnieres = femmesAdherentsTravailleursSaisonnieres;
-    }
-
-    public int getSalariesFemmesPermanentes() {
-        return salariesFemmesPermanentes;
-    }
-
-    public void setSalariesFemmesPermanentes(int salariesFemmesPermanentes) {
-        this.salariesFemmesPermanentes = salariesFemmesPermanentes;
-    }
-
-    public int getSalariesFemmesSaisonnieres() {
-        return salariesFemmesSaisonnieres;
-    }
-
-    public void setSalariesFemmesSaisonnieres(int salariesFemmesSaisonnieres) {
-        this.salariesFemmesSaisonnieres = salariesFemmesSaisonnieres;
-    }
-
-    public boolean getTenueReguliereAssemblees() {
-        return tenueReguliereAssemblees;
-    }
-
-    public void setTenueReguliereAssemblees(boolean tenueReguliereAssemblees) {
-        this.tenueReguliereAssemblees = tenueReguliereAssemblees;
-    }
-
-    public Date getDerniereAGannuelle() {
-        return derniereAGannuelle;
-    }
-
-    public void setDerniereAGannuelle(Date derniereAGannuelle) {
-        this.derniereAGannuelle = derniereAGannuelle;
-    }
-
-    public String getCommissaireAuxComptes() {
-        return commissaireAuxComptes;
-    }
-
-    public void setCommissaireAuxComptes(String commissaireAuxComptes) {
-        this.commissaireAuxComptes = commissaireAuxComptes;
     }
 
     public String getAdresse() {
@@ -241,12 +145,12 @@ public class Donneesgenerales implements Serializable {
         this.adresse = adresse;
     }
 
-    public int getTel() {
-        return tel;
+    public String getCommissaireAuxComptes() {
+        return commissaireAuxComptes;
     }
 
-    public void setTel(int tel) {
-        this.tel = tel;
+    public void setCommissaireAuxComptes(String commissaireAuxComptes) {
+        this.commissaireAuxComptes = commissaireAuxComptes;
     }
 
     public Date getDateModification() {
@@ -255,6 +159,86 @@ public class Donneesgenerales implements Serializable {
 
     public void setDateModification(Date dateModification) {
         this.dateModification = dateModification;
+    }
+
+    public Date getDerniereagannuelle() {
+        return derniereagannuelle;
+    }
+
+    public void setDerniereagannuelle(Date derniereagannuelle) {
+        this.derniereagannuelle = derniereagannuelle;
+    }
+
+    public Integer getFemmesAdherentsTravailleursPermanentes() {
+        return femmesAdherentsTravailleursPermanentes;
+    }
+
+    public void setFemmesAdherentsTravailleursPermanentes(Integer femmesAdherentsTravailleursPermanentes) {
+        this.femmesAdherentsTravailleursPermanentes = femmesAdherentsTravailleursPermanentes;
+    }
+
+    public Integer getFemmesAdherentsTravailleursSaisonnieres() {
+        return femmesAdherentsTravailleursSaisonnieres;
+    }
+
+    public void setFemmesAdherentsTravailleursSaisonnieres(Integer femmesAdherentsTravailleursSaisonnieres) {
+        this.femmesAdherentsTravailleursSaisonnieres = femmesAdherentsTravailleursSaisonnieres;
+    }
+
+    public Integer getSalariesFemmesPermanentes() {
+        return salariesFemmesPermanentes;
+    }
+
+    public void setSalariesFemmesPermanentes(Integer salariesFemmesPermanentes) {
+        this.salariesFemmesPermanentes = salariesFemmesPermanentes;
+    }
+
+    public Integer getSalariesFemmesSaisonnieres() {
+        return salariesFemmesSaisonnieres;
+    }
+
+    public void setSalariesFemmesSaisonnieres(Integer salariesFemmesSaisonnieres) {
+        this.salariesFemmesSaisonnieres = salariesFemmesSaisonnieres;
+    }
+
+    public Integer getSalariesPermanents() {
+        return salariesPermanents;
+    }
+
+    public void setSalariesPermanents(Integer salariesPermanents) {
+        this.salariesPermanents = salariesPermanents;
+    }
+
+    public Integer getSalariesSaisonniers() {
+        return salariesSaisonniers;
+    }
+
+    public void setSalariesSaisonniers(Integer salariesSaisonniers) {
+        this.salariesSaisonniers = salariesSaisonniers;
+    }
+
+    public Integer getTel() {
+        return tel;
+    }
+
+    public void setTel(Integer tel) {
+        this.tel = tel;
+    }
+
+    public Boolean getTenueReguliereAssemblees() {
+        return tenueReguliereAssemblees;
+    }
+
+    public void setTenueReguliereAssemblees(Boolean tenueReguliereAssemblees) {
+        this.tenueReguliereAssemblees = tenueReguliereAssemblees;
+    }
+
+    public Cooperative getIdCooperative() {
+        return idCooperative;
+    }
+
+    public void setIdCooperative(Cooperative idCooperative) {
+        this.idCooperative = idCooperative;
     }
 
     @Override

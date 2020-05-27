@@ -13,12 +13,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -32,428 +33,350 @@ import javax.validation.constraints.Size;
 public class Bilan implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Double id;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "id_cooperative")
-    private double idCooperative;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "FraisPreliminaires")
-    private double fraisPreliminaires;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "SubventionsInvestissement")
-    private double subventionsInvestissement;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "Terrains")
-    private double terrains;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "Constructions")
-    private double constructions;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "InstallationsMaterielEtOutillage")
-    private double installationsMaterielEtOutillage;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "MaterielTransport")
-    private double materielTransport;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "AutresImmobilisationsPersonnelles")
-    private double autresImmobilisationsPersonnelles;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "MaterielEtImmobilierBureau")
-    private double materielEtImmobilierBureau;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "TotalImmobilisations")
-    private double totalImmobilisations;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "TotalStocks")
-    private double totalStocks;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "Creance")
-    private double creance;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "Banque")
-    private double banque;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "Caisse")
-    private double caisse;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "DateModification")
-    @Temporal(TemporalType.DATE)
-    private Date dateModification;
-    @Basic(optional = false)
-    @NotNull
+    private Integer id;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "achat_revendus_marchandises")
+    private Double achatRevendusMarchandises;
+    @Column(name = "achats_consommes_matieres_et_fournitures")
+    private Double achatsConsommesMatieresEtFournitures;
+    @Column(name = "autres_charges")
+    private Double autresCharges;
+    @Column(name = "autres_charges_externes")
+    private Double autresChargesExternes;
+    @Column(name = "autres_creanciers")
+    private Double autresCreanciers;
+    @Column(name = "autres_immobilisations_personnelles")
+    private Double autresImmobilisationsPersonnelles;
+    @Column(name = "autres_reserves")
+    private Double autresReserves;
+    @Column(name = "banque")
+    private Double banque;
+    @Column(name = "caisse")
+    private Double caisse;
+    @Column(name = "capital_actuel")
+    private Double capitalActuel;
+    @Column(name = "charges_finacieres")
+    private Double chargesFinacieres;
+    @Column(name = "charges_personnel")
+    private Double chargesPersonnel;
+    @Column(name = "chiffre_affaires")
+    private Double chiffreAffaires;
+    @Column(name = "comptes_associes")
+    private Double comptesAssocies;
+    @Column(name = "consommation_exercice")
+    private Double consommationExercice;
+    @Column(name = "constructions")
+    private Double constructions;
+    @Column(name = "creance")
+    private Double creance;
     @Column(name = "date_bilan")
     @Temporal(TemporalType.DATE)
     private Date dateBilan;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "CapitalActuel")
-    private double capitalActuel;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "ReservesLegales")
-    private double reservesLegales;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "AutresReserves")
-    private double autresReserves;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "ReportAnouveau")
-    private double reportAnouveau;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "ResultatsNetsInstanceApplication")
-    private double resultatsNetsInstanceApplication;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "DetteFinancementLongTerme")
-    private double detteFinancementLongTerme;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "DetteFinancementCourTerme")
-    private double detteFinancementCourTerme;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "FournisseursEtComptesRattaches")
-    private double fournisseursEtComptesRattaches;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "Personnel")
-    private double personnel;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "OrganismesSociaux")
-    private double organismesSociaux;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "Etat")
-    private double etat;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "ComptesAssocies")
-    private double comptesAssocies;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "AutresCreanciers")
-    private double autresCreanciers;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "ChiffreAffaires")
-    private double chiffreAffaires;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "SubventionsExploitation")
-    private double subventionsExploitation;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "TransfertsDeCharges")
-    private double transfertsDeCharges;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "AchatRevendusMarchandises")
-    private double achatRevendusMarchandises;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "AchatsConsommesMatieresEtFournitures")
-    private double achatsConsommesMatieresEtFournitures;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "AutresChargesExternes")
-    private double autresChargesExternes;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "ImpotsEtTaxes")
-    private double impotsEtTaxes;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "TotalAchats")
-    private double totalAchats;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "ChargesPersonnel")
-    private double chargesPersonnel;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "AutresCharges")
-    private double autresCharges;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "ChargesFinacieres")
-    private double chargesFinacieres;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "DotationsExploitations")
-    private double dotationsExploitations;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "VenteMarchandisesEnLetat")
-    private double venteMarchandisesEnLetat;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "EtatAchatRevendusMarchandises")
-    private double etatAchatRevendusMarchandises;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "VenteBienEtServicesProduits")
-    private double venteBienEtServicesProduits;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "VariationStockProduits")
-    private double variationStockProduits;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "ImmobilisationsCooperatives")
-    private double immobilisationsCooperatives;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "EtatAutresChargesExternes")
-    private double etatAutresChargesExternes;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "MargeBruteSurVenteEnLetat")
-    private double margeBruteSurVenteEnLetat;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "ProductionExercice")
-    private double productionExercice;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "ConsommationExercice")
-    private double consommationExercice;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "ValeurAjoutee")
-    private double valeurAjoutee;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "TotalPassif")
-    private double totalPassif;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "TotalActif")
-    private double totalActif;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 10)
-    @Column(name = "Resultat")
+    @Column(name = "date_modification")
+    @Temporal(TemporalType.DATE)
+    private Date dateModification;
+    @Column(name = "dette_financement_cour_terme")
+    private Double detteFinancementCourTerme;
+    @Column(name = "dette_financement_long_terme")
+    private Double detteFinancementLongTerme;
+    @Column(name = "dotations_exploitations")
+    private Double dotationsExploitations;
+    @Column(name = "etat")
+    private Double etat;
+    @Column(name = "etat_achat_revendus_marchandises")
+    private Double etatAchatRevendusMarchandises;
+    @Column(name = "etat_autres_charges_externes")
+    private Double etatAutresChargesExternes;
+    @Column(name = "fournisseurs_et_comptes_rattaches")
+    private Double fournisseursEtComptesRattaches;
+    @Column(name = "frais_preliminaires")
+    private Double fraisPreliminaires;
+    @Column(name = "immobilisations_cooperatives")
+    private Double immobilisationsCooperatives;
+    @Column(name = "impots_et_taxes")
+    private Double impotsEtTaxes;
+    @Column(name = "installations_materiel_et_outillage")
+    private Double installationsMaterielEtOutillage;
+    @Column(name = "marge_brute_sur_vente_en_letat")
+    private Double margeBruteSurVenteEnLetat;
+    @Column(name = "materiel_et_immobilier_bureau")
+    private Double materielEtImmobilierBureau;
+    @Column(name = "materiel_transport")
+    private Double materielTransport;
+    @Column(name = "organismes_sociaux")
+    private Double organismesSociaux;
+    @Column(name = "personnel")
+    private Double personnel;
+    @Column(name = "production_exercice")
+    private Double productionExercice;
+    @Column(name = "report_anouveau")
+    private Double reportAnouveau;
+    @Column(name = "reserves_legales")
+    private Double reservesLegales;
+    @Size(max = 10)
+    @Column(name = "resultat")
     private String resultat;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "Resultat_valeur")
-    private double resultatvaleur;
+    @Column(name = "resultats_nets_instance_application")
+    private Double resultatsNetsInstanceApplication;
+    @Column(name = "resultat_valeur")
+    private Double resultatValeur;
+    @Column(name = "subventions_exploitation")
+    private Double subventionsExploitation;
+    @Column(name = "subventions_investissement")
+    private Double subventionsInvestissement;
+    @Column(name = "terrains")
+    private Double terrains;
+    @Column(name = "total_achats")
+    private Double totalAchats;
+    @Column(name = "total_actif")
+    private Double totalActif;
+    @Column(name = "total_immobilisations")
+    private Double totalImmobilisations;
+    @Column(name = "total_passif")
+    private Double totalPassif;
+    @Column(name = "total_stocks")
+    private Double totalStocks;
+    @Column(name = "transferts_de_charges")
+    private Double transfertsDeCharges;
+    @Column(name = "valeur_ajoutee")
+    private Double valeurAjoutee;
+    @Column(name = "variation_stock_produits")
+    private Double variationStockProduits;
+    @Column(name = "vente_bien_et_services_produits")
+    private Double venteBienEtServicesProduits;
+    @Column(name = "vente_marchandises_en_letat")
+    private Double venteMarchandisesEnLetat;
+    @JoinColumn(name = "id_cooperative", referencedColumnName = "id_cooperative")
+    @ManyToOne(optional = false)
+    private Cooperative idCooperative;
 
     public Bilan() {
     }
 
-    public Bilan(Double id) {
+    public Bilan(Integer id) {
         this.id = id;
     }
 
-    public Bilan(Double id, double idCooperative, double fraisPreliminaires, double subventionsInvestissement, double terrains, double constructions, double installationsMaterielEtOutillage, double materielTransport, double autresImmobilisationsPersonnelles, double materielEtImmobilierBureau, double totalImmobilisations, double totalStocks, double creance, double banque, double caisse, Date dateModification, Date dateBilan, double capitalActuel, double reservesLegales, double autresReserves, double reportAnouveau, double resultatsNetsInstanceApplication, double detteFinancementLongTerme, double detteFinancementCourTerme, double fournisseursEtComptesRattaches, double personnel, double organismesSociaux, double etat, double comptesAssocies, double autresCreanciers, double chiffreAffaires, double subventionsExploitation, double transfertsDeCharges, double achatRevendusMarchandises, double achatsConsommesMatieresEtFournitures, double autresChargesExternes, double impotsEtTaxes, double totalAchats, double chargesPersonnel, double autresCharges, double chargesFinacieres, double dotationsExploitations, double venteMarchandisesEnLetat, double etatAchatRevendusMarchandises, double venteBienEtServicesProduits, double variationStockProduits, double immobilisationsCooperatives, double etatAutresChargesExternes, double margeBruteSurVenteEnLetat, double productionExercice, double consommationExercice, double valeurAjoutee, double totalPassif, double totalActif, String resultat, double resultatvaleur) {
-        this.id = id;
-        this.idCooperative = idCooperative;
-        this.fraisPreliminaires = fraisPreliminaires;
-        this.subventionsInvestissement = subventionsInvestissement;
-        this.terrains = terrains;
-        this.constructions = constructions;
-        this.installationsMaterielEtOutillage = installationsMaterielEtOutillage;
-        this.materielTransport = materielTransport;
-        this.autresImmobilisationsPersonnelles = autresImmobilisationsPersonnelles;
-        this.materielEtImmobilierBureau = materielEtImmobilierBureau;
-        this.totalImmobilisations = totalImmobilisations;
-        this.totalStocks = totalStocks;
-        this.creance = creance;
-        this.banque = banque;
-        this.caisse = caisse;
-        this.dateModification = dateModification;
-        this.dateBilan = dateBilan;
-        this.capitalActuel = capitalActuel;
-        this.reservesLegales = reservesLegales;
-        this.autresReserves = autresReserves;
-        this.reportAnouveau = reportAnouveau;
-        this.resultatsNetsInstanceApplication = resultatsNetsInstanceApplication;
-        this.detteFinancementLongTerme = detteFinancementLongTerme;
-        this.detteFinancementCourTerme = detteFinancementCourTerme;
-        this.fournisseursEtComptesRattaches = fournisseursEtComptesRattaches;
-        this.personnel = personnel;
-        this.organismesSociaux = organismesSociaux;
-        this.etat = etat;
-        this.comptesAssocies = comptesAssocies;
-        this.autresCreanciers = autresCreanciers;
-        this.chiffreAffaires = chiffreAffaires;
-        this.subventionsExploitation = subventionsExploitation;
-        this.transfertsDeCharges = transfertsDeCharges;
-        this.achatRevendusMarchandises = achatRevendusMarchandises;
-        this.achatsConsommesMatieresEtFournitures = achatsConsommesMatieresEtFournitures;
-        this.autresChargesExternes = autresChargesExternes;
-        this.impotsEtTaxes = impotsEtTaxes;
-        this.totalAchats = totalAchats;
-        this.chargesPersonnel = chargesPersonnel;
-        this.autresCharges = autresCharges;
-        this.chargesFinacieres = chargesFinacieres;
-        this.dotationsExploitations = dotationsExploitations;
-        this.venteMarchandisesEnLetat = venteMarchandisesEnLetat;
-        this.etatAchatRevendusMarchandises = etatAchatRevendusMarchandises;
-        this.venteBienEtServicesProduits = venteBienEtServicesProduits;
-        this.variationStockProduits = variationStockProduits;
-        this.immobilisationsCooperatives = immobilisationsCooperatives;
-        this.etatAutresChargesExternes = etatAutresChargesExternes;
-        this.margeBruteSurVenteEnLetat = margeBruteSurVenteEnLetat;
-        this.productionExercice = productionExercice;
-        this.consommationExercice = consommationExercice;
-        this.valeurAjoutee = valeurAjoutee;
-        this.totalPassif = totalPassif;
-        this.totalActif = totalActif;
-        this.resultat = resultat;
-        this.resultatvaleur = resultatvaleur;
-    }
+    public Bilan(Double achatRevendusMarchandises, Double achatsConsommesMatieresEtFournitures, Double autresCharges,
+			Double autresChargesExternes, Double autresCreanciers, Double autresImmobilisationsPersonnelles,
+			Double autresReserves, Double banque, Double caisse, Double capitalActuel, Double chargesFinacieres,
+			Double chargesPersonnel, Double chiffreAffaires, Double comptesAssocies, Double consommationExercice,
+			Double constructions, Double creance, Date dateBilan, Date dateModification,
+			Double detteFinancementCourTerme, Double detteFinancementLongTerme, Double dotationsExploitations,
+			Double etat, Double etatAchatRevendusMarchandises, Double etatAutresChargesExternes,
+			Double fournisseursEtComptesRattaches, Double fraisPreliminaires, Double immobilisationsCooperatives,
+			Double impotsEtTaxes, Double installationsMaterielEtOutillage, Double margeBruteSurVenteEnLetat,
+			Double materielEtImmobilierBureau, Double materielTransport, Double organismesSociaux, Double personnel,
+			Double productionExercice, Double reportAnouveau, Double reservesLegales, @Size(max = 10) String resultat,
+			Double resultatsNetsInstanceApplication, Double resultatValeur, Double subventionsExploitation,
+			Double subventionsInvestissement, Double terrains, Double totalAchats, Double totalActif,
+			Double totalImmobilisations, Double totalPassif, Double totalStocks, Double transfertsDeCharges,
+			Double valeurAjoutee, Double variationStockProduits, Double venteBienEtServicesProduits,
+			Double venteMarchandisesEnLetat) {
+		//super();
+		this.achatRevendusMarchandises = achatRevendusMarchandises;
+		this.achatsConsommesMatieresEtFournitures = achatsConsommesMatieresEtFournitures;
+		this.autresCharges = autresCharges;
+		this.autresChargesExternes = autresChargesExternes;
+		this.autresCreanciers = autresCreanciers;
+		this.autresImmobilisationsPersonnelles = autresImmobilisationsPersonnelles;
+		this.autresReserves = autresReserves;
+		this.banque = banque;
+		this.caisse = caisse;
+		this.capitalActuel = capitalActuel;
+		this.chargesFinacieres = chargesFinacieres;
+		this.chargesPersonnel = chargesPersonnel;
+		this.chiffreAffaires = chiffreAffaires;
+		this.comptesAssocies = comptesAssocies;
+		this.consommationExercice = consommationExercice;
+		this.constructions = constructions;
+		this.creance = creance;
+		this.dateBilan = dateBilan;
+		this.dateModification = dateModification;
+		this.detteFinancementCourTerme = detteFinancementCourTerme;
+		this.detteFinancementLongTerme = detteFinancementLongTerme;
+		this.dotationsExploitations = dotationsExploitations;
+		this.etat = etat;
+		this.etatAchatRevendusMarchandises = etatAchatRevendusMarchandises;
+		this.etatAutresChargesExternes = etatAutresChargesExternes;
+		this.fournisseursEtComptesRattaches = fournisseursEtComptesRattaches;
+		this.fraisPreliminaires = fraisPreliminaires;
+		this.immobilisationsCooperatives = immobilisationsCooperatives;
+		this.impotsEtTaxes = impotsEtTaxes;
+		this.installationsMaterielEtOutillage = installationsMaterielEtOutillage;
+		this.margeBruteSurVenteEnLetat = margeBruteSurVenteEnLetat;
+		this.materielEtImmobilierBureau = materielEtImmobilierBureau;
+		this.materielTransport = materielTransport;
+		this.organismesSociaux = organismesSociaux;
+		this.personnel = personnel;
+		this.productionExercice = productionExercice;
+		this.reportAnouveau = reportAnouveau;
+		this.reservesLegales = reservesLegales;
+		this.resultat = resultat;
+		this.resultatsNetsInstanceApplication = resultatsNetsInstanceApplication;
+		this.resultatValeur = resultatValeur;
+		this.subventionsExploitation = subventionsExploitation;
+		this.subventionsInvestissement = subventionsInvestissement;
+		this.terrains = terrains;
+		this.totalAchats = totalAchats;
+		this.totalActif = totalActif;
+		this.totalImmobilisations = totalImmobilisations;
+		this.totalPassif = totalPassif;
+		this.totalStocks = totalStocks;
+		this.transfertsDeCharges = transfertsDeCharges;
+		this.valeurAjoutee = valeurAjoutee;
+		this.variationStockProduits = variationStockProduits;
+		this.venteBienEtServicesProduits = venteBienEtServicesProduits;
+		this.venteMarchandisesEnLetat = venteMarchandisesEnLetat;
+		
+	}
 
-    public Double getId() {
+	public Integer getId() {
         return id;
     }
 
-    public void setId(Double id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public double getIdCooperative() {
-        return idCooperative;
+    public Double getAchatRevendusMarchandises() {
+        return achatRevendusMarchandises;
     }
 
-    public void setIdCooperative(double idCooperative) {
-        this.idCooperative = idCooperative;
+    public void setAchatRevendusMarchandises(Double achatRevendusMarchandises) {
+        this.achatRevendusMarchandises = achatRevendusMarchandises;
     }
 
-    public double getFraisPreliminaires() {
-        return fraisPreliminaires;
+    public Double getAchatsConsommesMatieresEtFournitures() {
+        return achatsConsommesMatieresEtFournitures;
     }
 
-    public void setFraisPreliminaires(double fraisPreliminaires) {
-        this.fraisPreliminaires = fraisPreliminaires;
+    public void setAchatsConsommesMatieresEtFournitures(Double achatsConsommesMatieresEtFournitures) {
+        this.achatsConsommesMatieresEtFournitures = achatsConsommesMatieresEtFournitures;
     }
 
-    public double getSubventionsInvestissement() {
-        return subventionsInvestissement;
+    public Double getAutresCharges() {
+        return autresCharges;
     }
 
-    public void setSubventionsInvestissement(double subventionsInvestissement) {
-        this.subventionsInvestissement = subventionsInvestissement;
+    public void setAutresCharges(Double autresCharges) {
+        this.autresCharges = autresCharges;
     }
 
-    public double getTerrains() {
-        return terrains;
+    public Double getAutresChargesExternes() {
+        return autresChargesExternes;
     }
 
-    public void setTerrains(double terrains) {
-        this.terrains = terrains;
+    public void setAutresChargesExternes(Double autresChargesExternes) {
+        this.autresChargesExternes = autresChargesExternes;
     }
 
-    public double getConstructions() {
-        return constructions;
+    public Double getAutresCreanciers() {
+        return autresCreanciers;
     }
 
-    public void setConstructions(double constructions) {
-        this.constructions = constructions;
+    public void setAutresCreanciers(Double autresCreanciers) {
+        this.autresCreanciers = autresCreanciers;
     }
 
-    public double getInstallationsMaterielEtOutillage() {
-        return installationsMaterielEtOutillage;
-    }
-
-    public void setInstallationsMaterielEtOutillage(double installationsMaterielEtOutillage) {
-        this.installationsMaterielEtOutillage = installationsMaterielEtOutillage;
-    }
-
-    public double getMaterielTransport() {
-        return materielTransport;
-    }
-
-    public void setMaterielTransport(double materielTransport) {
-        this.materielTransport = materielTransport;
-    }
-
-    public double getAutresImmobilisationsPersonnelles() {
+    public Double getAutresImmobilisationsPersonnelles() {
         return autresImmobilisationsPersonnelles;
     }
 
-    public void setAutresImmobilisationsPersonnelles(double autresImmobilisationsPersonnelles) {
+    public void setAutresImmobilisationsPersonnelles(Double autresImmobilisationsPersonnelles) {
         this.autresImmobilisationsPersonnelles = autresImmobilisationsPersonnelles;
     }
 
-    public double getMaterielEtImmobilierBureau() {
-        return materielEtImmobilierBureau;
+    public Double getAutresReserves() {
+        return autresReserves;
     }
 
-    public void setMaterielEtImmobilierBureau(double materielEtImmobilierBureau) {
-        this.materielEtImmobilierBureau = materielEtImmobilierBureau;
+    public void setAutresReserves(Double autresReserves) {
+        this.autresReserves = autresReserves;
     }
 
-    public double getTotalImmobilisations() {
-        return totalImmobilisations;
-    }
-
-    public void setTotalImmobilisations(double totalImmobilisations) {
-        this.totalImmobilisations = totalImmobilisations;
-    }
-
-    public double getTotalStocks() {
-        return totalStocks;
-    }
-
-    public void setTotalStocks(double totalStocks) {
-        this.totalStocks = totalStocks;
-    }
-
-    public double getCreance() {
-        return creance;
-    }
-
-    public void setCreance(double creance) {
-        this.creance = creance;
-    }
-
-    public double getBanque() {
+    public Double getBanque() {
         return banque;
     }
 
-    public void setBanque(double banque) {
+    public void setBanque(Double banque) {
         this.banque = banque;
     }
 
-    public double getCaisse() {
+    public Double getCaisse() {
         return caisse;
     }
 
-    public void setCaisse(double caisse) {
+    public void setCaisse(Double caisse) {
         this.caisse = caisse;
     }
 
-    public Date getDateModification() {
-        return dateModification;
+    public Double getCapitalActuel() {
+        return capitalActuel;
     }
 
-    public void setDateModification(Date dateModification) {
-        this.dateModification = dateModification;
+    public void setCapitalActuel(Double capitalActuel) {
+        this.capitalActuel = capitalActuel;
+    }
+
+    public Double getChargesFinacieres() {
+        return chargesFinacieres;
+    }
+
+    public void setChargesFinacieres(Double chargesFinacieres) {
+        this.chargesFinacieres = chargesFinacieres;
+    }
+
+    public Double getChargesPersonnel() {
+        return chargesPersonnel;
+    }
+
+    public void setChargesPersonnel(Double chargesPersonnel) {
+        this.chargesPersonnel = chargesPersonnel;
+    }
+
+    public Double getChiffreAffaires() {
+        return chiffreAffaires;
+    }
+
+    public void setChiffreAffaires(Double chiffreAffaires) {
+        this.chiffreAffaires = chiffreAffaires;
+    }
+
+    public Double getComptesAssocies() {
+        return comptesAssocies;
+    }
+
+    public void setComptesAssocies(Double comptesAssocies) {
+        this.comptesAssocies = comptesAssocies;
+    }
+
+    public Double getConsommationExercice() {
+        return consommationExercice;
+    }
+
+    public void setConsommationExercice(Double consommationExercice) {
+        this.consommationExercice = consommationExercice;
+    }
+
+    public Double getConstructions() {
+        return constructions;
+    }
+
+    public void setConstructions(Double constructions) {
+        this.constructions = constructions;
+    }
+
+    public Double getCreance() {
+        return creance;
+    }
+
+    public void setCreance(Double creance) {
+        this.creance = creance;
     }
 
     public Date getDateBilan() {
@@ -464,300 +387,164 @@ public class Bilan implements Serializable {
         this.dateBilan = dateBilan;
     }
 
-    public double getCapitalActuel() {
-        return capitalActuel;
+    public Date getDateModification() {
+        return dateModification;
     }
 
-    public void setCapitalActuel(double capitalActuel) {
-        this.capitalActuel = capitalActuel;
+    public void setDateModification(Date dateModification) {
+        this.dateModification = dateModification;
     }
 
-    public double getReservesLegales() {
-        return reservesLegales;
-    }
-
-    public void setReservesLegales(double reservesLegales) {
-        this.reservesLegales = reservesLegales;
-    }
-
-    public double getAutresReserves() {
-        return autresReserves;
-    }
-
-    public void setAutresReserves(double autresReserves) {
-        this.autresReserves = autresReserves;
-    }
-
-    public double getReportAnouveau() {
-        return reportAnouveau;
-    }
-
-    public void setReportAnouveau(double reportAnouveau) {
-        this.reportAnouveau = reportAnouveau;
-    }
-
-    public double getResultatsNetsInstanceApplication() {
-        return resultatsNetsInstanceApplication;
-    }
-
-    public void setResultatsNetsInstanceApplication(double resultatsNetsInstanceApplication) {
-        this.resultatsNetsInstanceApplication = resultatsNetsInstanceApplication;
-    }
-
-    public double getDetteFinancementLongTerme() {
-        return detteFinancementLongTerme;
-    }
-
-    public void setDetteFinancementLongTerme(double detteFinancementLongTerme) {
-        this.detteFinancementLongTerme = detteFinancementLongTerme;
-    }
-
-    public double getDetteFinancementCourTerme() {
+    public Double getDetteFinancementCourTerme() {
         return detteFinancementCourTerme;
     }
 
-    public void setDetteFinancementCourTerme(double detteFinancementCourTerme) {
+    public void setDetteFinancementCourTerme(Double detteFinancementCourTerme) {
         this.detteFinancementCourTerme = detteFinancementCourTerme;
     }
 
-    public double getFournisseursEtComptesRattaches() {
-        return fournisseursEtComptesRattaches;
+    public Double getDetteFinancementLongTerme() {
+        return detteFinancementLongTerme;
     }
 
-    public void setFournisseursEtComptesRattaches(double fournisseursEtComptesRattaches) {
-        this.fournisseursEtComptesRattaches = fournisseursEtComptesRattaches;
+    public void setDetteFinancementLongTerme(Double detteFinancementLongTerme) {
+        this.detteFinancementLongTerme = detteFinancementLongTerme;
     }
 
-    public double getPersonnel() {
-        return personnel;
-    }
-
-    public void setPersonnel(double personnel) {
-        this.personnel = personnel;
-    }
-
-    public double getOrganismesSociaux() {
-        return organismesSociaux;
-    }
-
-    public void setOrganismesSociaux(double organismesSociaux) {
-        this.organismesSociaux = organismesSociaux;
-    }
-
-    public double getEtat() {
-        return etat;
-    }
-
-    public void setEtat(double etat) {
-        this.etat = etat;
-    }
-
-    public double getComptesAssocies() {
-        return comptesAssocies;
-    }
-
-    public void setComptesAssocies(double comptesAssocies) {
-        this.comptesAssocies = comptesAssocies;
-    }
-
-    public double getAutresCreanciers() {
-        return autresCreanciers;
-    }
-
-    public void setAutresCreanciers(double autresCreanciers) {
-        this.autresCreanciers = autresCreanciers;
-    }
-
-    public double getChiffreAffaires() {
-        return chiffreAffaires;
-    }
-
-    public void setChiffreAffaires(double chiffreAffaires) {
-        this.chiffreAffaires = chiffreAffaires;
-    }
-
-    public double getSubventionsExploitation() {
-        return subventionsExploitation;
-    }
-
-    public void setSubventionsExploitation(double subventionsExploitation) {
-        this.subventionsExploitation = subventionsExploitation;
-    }
-
-    public double getTransfertsDeCharges() {
-        return transfertsDeCharges;
-    }
-
-    public void setTransfertsDeCharges(double transfertsDeCharges) {
-        this.transfertsDeCharges = transfertsDeCharges;
-    }
-
-    public double getAchatRevendusMarchandises() {
-        return achatRevendusMarchandises;
-    }
-
-    public void setAchatRevendusMarchandises(double achatRevendusMarchandises) {
-        this.achatRevendusMarchandises = achatRevendusMarchandises;
-    }
-
-    public double getAchatsConsommesMatieresEtFournitures() {
-        return achatsConsommesMatieresEtFournitures;
-    }
-
-    public void setAchatsConsommesMatieresEtFournitures(double achatsConsommesMatieresEtFournitures) {
-        this.achatsConsommesMatieresEtFournitures = achatsConsommesMatieresEtFournitures;
-    }
-
-    public double getAutresChargesExternes() {
-        return autresChargesExternes;
-    }
-
-    public void setAutresChargesExternes(double autresChargesExternes) {
-        this.autresChargesExternes = autresChargesExternes;
-    }
-
-    public double getImpotsEtTaxes() {
-        return impotsEtTaxes;
-    }
-
-    public void setImpotsEtTaxes(double impotsEtTaxes) {
-        this.impotsEtTaxes = impotsEtTaxes;
-    }
-
-    public double getTotalAchats() {
-        return totalAchats;
-    }
-
-    public void setTotalAchats(double totalAchats) {
-        this.totalAchats = totalAchats;
-    }
-
-    public double getChargesPersonnel() {
-        return chargesPersonnel;
-    }
-
-    public void setChargesPersonnel(double chargesPersonnel) {
-        this.chargesPersonnel = chargesPersonnel;
-    }
-
-    public double getAutresCharges() {
-        return autresCharges;
-    }
-
-    public void setAutresCharges(double autresCharges) {
-        this.autresCharges = autresCharges;
-    }
-
-    public double getChargesFinacieres() {
-        return chargesFinacieres;
-    }
-
-    public void setChargesFinacieres(double chargesFinacieres) {
-        this.chargesFinacieres = chargesFinacieres;
-    }
-
-    public double getDotationsExploitations() {
+    public Double getDotationsExploitations() {
         return dotationsExploitations;
     }
 
-    public void setDotationsExploitations(double dotationsExploitations) {
+    public void setDotationsExploitations(Double dotationsExploitations) {
         this.dotationsExploitations = dotationsExploitations;
     }
 
-    public double getVenteMarchandisesEnLetat() {
-        return venteMarchandisesEnLetat;
+    public Double getEtat() {
+        return etat;
     }
 
-    public void setVenteMarchandisesEnLetat(double venteMarchandisesEnLetat) {
-        this.venteMarchandisesEnLetat = venteMarchandisesEnLetat;
+    public void setEtat(Double etat) {
+        this.etat = etat;
     }
 
-    public double getEtatAchatRevendusMarchandises() {
+    public Double getEtatAchatRevendusMarchandises() {
         return etatAchatRevendusMarchandises;
     }
 
-    public void setEtatAchatRevendusMarchandises(double etatAchatRevendusMarchandises) {
+    public void setEtatAchatRevendusMarchandises(Double etatAchatRevendusMarchandises) {
         this.etatAchatRevendusMarchandises = etatAchatRevendusMarchandises;
     }
 
-    public double getVenteBienEtServicesProduits() {
-        return venteBienEtServicesProduits;
-    }
-
-    public void setVenteBienEtServicesProduits(double venteBienEtServicesProduits) {
-        this.venteBienEtServicesProduits = venteBienEtServicesProduits;
-    }
-
-    public double getVariationStockProduits() {
-        return variationStockProduits;
-    }
-
-    public void setVariationStockProduits(double variationStockProduits) {
-        this.variationStockProduits = variationStockProduits;
-    }
-
-    public double getImmobilisationsCooperatives() {
-        return immobilisationsCooperatives;
-    }
-
-    public void setImmobilisationsCooperatives(double immobilisationsCooperatives) {
-        this.immobilisationsCooperatives = immobilisationsCooperatives;
-    }
-
-    public double getEtatAutresChargesExternes() {
+    public Double getEtatAutresChargesExternes() {
         return etatAutresChargesExternes;
     }
 
-    public void setEtatAutresChargesExternes(double etatAutresChargesExternes) {
+    public void setEtatAutresChargesExternes(Double etatAutresChargesExternes) {
         this.etatAutresChargesExternes = etatAutresChargesExternes;
     }
 
-    public double getMargeBruteSurVenteEnLetat() {
+    public Double getFournisseursEtComptesRattaches() {
+        return fournisseursEtComptesRattaches;
+    }
+
+    public void setFournisseursEtComptesRattaches(Double fournisseursEtComptesRattaches) {
+        this.fournisseursEtComptesRattaches = fournisseursEtComptesRattaches;
+    }
+
+    public Double getFraisPreliminaires() {
+        return fraisPreliminaires;
+    }
+
+    public void setFraisPreliminaires(Double fraisPreliminaires) {
+        this.fraisPreliminaires = fraisPreliminaires;
+    }
+
+    public Double getImmobilisationsCooperatives() {
+        return immobilisationsCooperatives;
+    }
+
+    public void setImmobilisationsCooperatives(Double immobilisationsCooperatives) {
+        this.immobilisationsCooperatives = immobilisationsCooperatives;
+    }
+
+    public Double getImpotsEtTaxes() {
+        return impotsEtTaxes;
+    }
+
+    public void setImpotsEtTaxes(Double impotsEtTaxes) {
+        this.impotsEtTaxes = impotsEtTaxes;
+    }
+
+    public Double getInstallationsMaterielEtOutillage() {
+        return installationsMaterielEtOutillage;
+    }
+
+    public void setInstallationsMaterielEtOutillage(Double installationsMaterielEtOutillage) {
+        this.installationsMaterielEtOutillage = installationsMaterielEtOutillage;
+    }
+
+    public Double getMargeBruteSurVenteEnLetat() {
         return margeBruteSurVenteEnLetat;
     }
 
-    public void setMargeBruteSurVenteEnLetat(double margeBruteSurVenteEnLetat) {
+    public void setMargeBruteSurVenteEnLetat(Double margeBruteSurVenteEnLetat) {
         this.margeBruteSurVenteEnLetat = margeBruteSurVenteEnLetat;
     }
 
-    public double getProductionExercice() {
+    public Double getMaterielEtImmobilierBureau() {
+        return materielEtImmobilierBureau;
+    }
+
+    public void setMaterielEtImmobilierBureau(Double materielEtImmobilierBureau) {
+        this.materielEtImmobilierBureau = materielEtImmobilierBureau;
+    }
+
+    public Double getMaterielTransport() {
+        return materielTransport;
+    }
+
+    public void setMaterielTransport(Double materielTransport) {
+        this.materielTransport = materielTransport;
+    }
+
+    public Double getOrganismesSociaux() {
+        return organismesSociaux;
+    }
+
+    public void setOrganismesSociaux(Double organismesSociaux) {
+        this.organismesSociaux = organismesSociaux;
+    }
+
+    public Double getPersonnel() {
+        return personnel;
+    }
+
+    public void setPersonnel(Double personnel) {
+        this.personnel = personnel;
+    }
+
+    public Double getProductionExercice() {
         return productionExercice;
     }
 
-    public void setProductionExercice(double productionExercice) {
+    public void setProductionExercice(Double productionExercice) {
         this.productionExercice = productionExercice;
     }
 
-    public double getConsommationExercice() {
-        return consommationExercice;
+    public Double getReportAnouveau() {
+        return reportAnouveau;
     }
 
-    public void setConsommationExercice(double consommationExercice) {
-        this.consommationExercice = consommationExercice;
+    public void setReportAnouveau(Double reportAnouveau) {
+        this.reportAnouveau = reportAnouveau;
     }
 
-    public double getValeurAjoutee() {
-        return valeurAjoutee;
+    public Double getReservesLegales() {
+        return reservesLegales;
     }
 
-    public void setValeurAjoutee(double valeurAjoutee) {
-        this.valeurAjoutee = valeurAjoutee;
-    }
-
-    public double getTotalPassif() {
-        return totalPassif;
-    }
-
-    public void setTotalPassif(double totalPassif) {
-        this.totalPassif = totalPassif;
-    }
-
-    public double getTotalActif() {
-        return totalActif;
-    }
-
-    public void setTotalActif(double totalActif) {
-        this.totalActif = totalActif;
+    public void setReservesLegales(Double reservesLegales) {
+        this.reservesLegales = reservesLegales;
     }
 
     public String getResultat() {
@@ -768,12 +555,132 @@ public class Bilan implements Serializable {
         this.resultat = resultat;
     }
 
-    public double getResultatvaleur() {
-        return resultatvaleur;
+    public Double getResultatsNetsInstanceApplication() {
+        return resultatsNetsInstanceApplication;
     }
 
-    public void setResultatvaleur(double resultatvaleur) {
-        this.resultatvaleur = resultatvaleur;
+    public void setResultatsNetsInstanceApplication(Double resultatsNetsInstanceApplication) {
+        this.resultatsNetsInstanceApplication = resultatsNetsInstanceApplication;
+    }
+
+    public Double getResultatValeur() {
+        return resultatValeur;
+    }
+
+    public void setResultatValeur(Double resultatValeur) {
+        this.resultatValeur = resultatValeur;
+    }
+
+    public Double getSubventionsExploitation() {
+        return subventionsExploitation;
+    }
+
+    public void setSubventionsExploitation(Double subventionsExploitation) {
+        this.subventionsExploitation = subventionsExploitation;
+    }
+
+    public Double getSubventionsInvestissement() {
+        return subventionsInvestissement;
+    }
+
+    public void setSubventionsInvestissement(Double subventionsInvestissement) {
+        this.subventionsInvestissement = subventionsInvestissement;
+    }
+
+    public Double getTerrains() {
+        return terrains;
+    }
+
+    public void setTerrains(Double terrains) {
+        this.terrains = terrains;
+    }
+
+    public Double getTotalAchats() {
+        return totalAchats;
+    }
+
+    public void setTotalAchats(Double totalAchats) {
+        this.totalAchats = totalAchats;
+    }
+
+    public Double getTotalActif() {
+        return totalActif;
+    }
+
+    public void setTotalActif(Double totalActif) {
+        this.totalActif = totalActif;
+    }
+
+    public Double getTotalImmobilisations() {
+        return totalImmobilisations;
+    }
+
+    public void setTotalImmobilisations(Double totalImmobilisations) {
+        this.totalImmobilisations = totalImmobilisations;
+    }
+
+    public Double getTotalPassif() {
+        return totalPassif;
+    }
+
+    public void setTotalPassif(Double totalPassif) {
+        this.totalPassif = totalPassif;
+    }
+
+    public Double getTotalStocks() {
+        return totalStocks;
+    }
+
+    public void setTotalStocks(Double totalStocks) {
+        this.totalStocks = totalStocks;
+    }
+
+    public Double getTransfertsDeCharges() {
+        return transfertsDeCharges;
+    }
+
+    public void setTransfertsDeCharges(Double transfertsDeCharges) {
+        this.transfertsDeCharges = transfertsDeCharges;
+    }
+
+    public Double getValeurAjoutee() {
+        return valeurAjoutee;
+    }
+
+    public void setValeurAjoutee(Double valeurAjoutee) {
+        this.valeurAjoutee = valeurAjoutee;
+    }
+
+    public Double getVariationStockProduits() {
+        return variationStockProduits;
+    }
+
+    public void setVariationStockProduits(Double variationStockProduits) {
+        this.variationStockProduits = variationStockProduits;
+    }
+
+    public Double getVenteBienEtServicesProduits() {
+        return venteBienEtServicesProduits;
+    }
+
+    public void setVenteBienEtServicesProduits(Double venteBienEtServicesProduits) {
+        this.venteBienEtServicesProduits = venteBienEtServicesProduits;
+    }
+
+    public Double getVenteMarchandisesEnLetat() {
+        return venteMarchandisesEnLetat;
+    }
+
+    public void setVenteMarchandisesEnLetat(Double venteMarchandisesEnLetat) {
+        this.venteMarchandisesEnLetat = venteMarchandisesEnLetat;
+    }
+
+    public Cooperative getIdCooperative() {
+        return idCooperative;
+    }
+
+    public void setIdCooperative(Cooperative idCooperative) {
+        this.idCooperative = idCooperative;
     }
 
     @Override

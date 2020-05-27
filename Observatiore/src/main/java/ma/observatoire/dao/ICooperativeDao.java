@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import ma.observatoire.entitie.Branche;
 import ma.observatoire.entitie.Cooperative;
 import ma.observatoire.entitie.Province;
+import ma.observatoire.entitie.Prsident;
 import ma.observatoire.entitie.Region;
 import ma.observatoire.entitie.Secteur;
 public interface ICooperativeDao extends JpaRepository<Cooperative, Double> {
@@ -17,4 +18,5 @@ public interface ICooperativeDao extends JpaRepository<Cooperative, Double> {
 	 List<Cooperative> findBySecteur(Secteur secteur);
 	 List<Cooperative> findByBranche(Branche branche);
 	 List*/
+	Cooperative findByidPresident(Prsident idPresident);
 }
