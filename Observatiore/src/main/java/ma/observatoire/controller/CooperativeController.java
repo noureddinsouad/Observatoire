@@ -53,7 +53,7 @@ public class CooperativeController {
 	}
 	
 	@RequestMapping( value = "/Donnees", method = RequestMethod.POST )
-	public Donneesgenerales addDonnees(Donneesgenerales donnees) {
+	public Donneesgenerales addDonnees(@RequestBody Donneesgenerales donnees) {
 		return donneesGeneral.addDonnees(donnees);
 	}
 	

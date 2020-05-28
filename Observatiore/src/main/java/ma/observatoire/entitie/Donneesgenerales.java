@@ -50,7 +50,7 @@ public class Donneesgenerales implements Serializable {
     @Column(name = "commissaire_aux_comptes")
     private String commissaireAuxComptes;
     @Basic(optional = false)
-    @NotNull
+   /*@NotNull*/
     @Column(name = "date_modification")
     @Temporal(TemporalType.DATE)
     private Date dateModification;

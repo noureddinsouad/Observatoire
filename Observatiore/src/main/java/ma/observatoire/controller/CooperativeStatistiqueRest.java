@@ -78,15 +78,32 @@ public class CooperativeStatistiqueRest {
 		return (ArrayList<Object[]>) cooperativeService.EvolutionCreationParSecteur(year);
 	}
 	@RequestMapping(value="/evolutionCreationParRegionParmois",method=RequestMethod.GET)
-	public  ArrayList<Object[]> evolutionCreationParRegion(@RequestParam(name="year",defaultValue="2020") int year,@RequestParam(name="month",defaultValue="2") int month) {
+	public  ArrayList<Object[]> evolutionCreationParRegion(@RequestParam(name="year",defaultValue="2020") int year,@RequestParam(name="month",defaultValue="02") int month) {
 		System.out.println(cooperativeService==null);
 		return (ArrayList<Object[]>) cooperativeService.EvolutionCreationParRegion(year,month);
 	}
 	@RequestMapping(value="/evolutionCreationParSecteurParmois",method=RequestMethod.GET)
-	public  ArrayList<Object[]> evolutionCreationParSecteur(@RequestParam(name="year",defaultValue="2020") int year,@RequestParam(name="month",defaultValue="2") int month) {
+	public  ArrayList<Object[]> evolutionCreationParSecteur(@RequestParam(name="year",defaultValue="2020") int year,@RequestParam(name="month",defaultValue="02") int month) {
 		System.out.println(cooperativeService==null);
 		return (ArrayList<Object[]>) cooperativeService.EvolutionCreationParSecteur(year,month);
 	}
+	@RequestMapping(value="/NombreCooperativeParRegionParYear",method=RequestMethod.GET)
+	  public  List<Object[]> NombreCooperativesParRegion(@RequestParam(name="year",defaultValue="2020") int year) {
+			return cooperativeService.NombreCooperativesParRegion(year);
+		}
+		@RequestMapping(value="/NombreCooperativeParSecteurParYear",method=RequestMethod.GET)
+		  public  List<Object[]> NombreCooperativesParSecteur(@RequestParam(name="year",defaultValue="2020") int year) {
+			  return cooperativeService.NombreCooperativesParSecteur(year);
+		  }
+	
+	@RequestMapping(value="/NombreCooperativeParRegionParmois",method=RequestMethod.GET)
+  public  List<Object[]> NombreCooperativesParRegion(@RequestParam(name="year",defaultValue="2020") int year,@RequestParam(name="month",defaultValue="02") int month) {
+		return cooperativeService.NombreCooperativesParRegion(year,month);
+	}
+	@RequestMapping(value="/NombreCooperativeParSecteurParmois",method=RequestMethod.GET)
+	  public  List<Object[]> NombreCooperativesParSecteur(@RequestParam(name="year",defaultValue="2020") int year,@RequestParam(name="month",defaultValue="02") int month) {
+		  return cooperativeService.NombreCooperativesParSecteur(year,month);
+	  }
 	
 	
 }

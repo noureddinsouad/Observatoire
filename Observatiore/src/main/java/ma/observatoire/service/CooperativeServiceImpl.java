@@ -1,7 +1,9 @@
 package ma.observatoire.service;
 
-import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -205,7 +207,7 @@ public class CooperativeServiceImpl implements CooperativeService {
 
 	public List<Object[]> NombreCooperativesParRegion(int year) {
 		TypedQuery<Object[]> query = em.createQuery(
-				"select count(c), c.region.region from Cooperative c WHERE YEAR(c.dateCreation)<= ?1 GROUP BY c.Region",
+				"select count(c), c.region.region from Cooperative c WHERE YEAR(c.dateCreation)<= ?1 GROUP BY c.region",
 				Object[].class);
 		query.setParameter(1, year);
 		List<Object[]> results = query.getResultList();
@@ -222,13 +224,35 @@ public class CooperativeServiceImpl implements CooperativeService {
 	}
 
 	public List<Object[]> NombreCooperativesParRegion(int year, int month) {
-		// TODO Auto-generated method stub
-		return null;
+		TypedQuery<Object[]> query = em.createQuery(
+				"select count(c), c.region.region from Cooperative c WHERE c.dateCreation<= ?1 GROUP BY c.region",
+				Object[].class);
+		Date d=null;
+		try {
+			d=new SimpleDateFormat("yyyy-MM-dd").parse(year+"-"+month+"-05");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		query.setParameter(1,d, TemporalType.DATE);
+		List<Object[]> results = query.getResultList();
+		return results;
 	}
 
 	public List<Object[]> NombreCooperativesParSecteur(int year, int month) {
-		// TODO Auto-generated method stub
-		return null;
+		TypedQuery<Object[]> query = em.createQuery(
+				"select count(c), c.idSecteur.secteur from Cooperative c WHERE c.dateCreation<= ?1 GROUP BY c.idSecteur",
+				Object[].class);
+		Date d=null;
+		try {
+			d=new SimpleDateFormat("yyyy-MM-dd").parse(year+"-"+month+"-05");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		query.setParameter(1,d, TemporalType.DATE);
+		List<Object[]> results = query.getResultList();
+		return results;
 	}
 
 }
