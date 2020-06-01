@@ -40,10 +40,7 @@ public class Region implements Serializable {
     @Size(min = 1, max = 30)
     @Column(name = "region")
     private String region;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idRegion")
-    private List<Province> provinceList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "region")
-    private List<Cooperative> cooperativeList;
+
 
     public Region() {
     }
@@ -73,21 +70,7 @@ public class Region implements Serializable {
         this.region = region;
     }
 
-    public List<Province> getProvinceList() {
-        return provinceList;
-    }
-
-    public void setProvinceList(List<Province> provinceList) {
-        this.provinceList = provinceList;
-    }
-
-    public List<Cooperative> getCooperativeList() {
-        return cooperativeList;
-    }
-
-    public void setCooperativeList(List<Cooperative> cooperativeList) {
-        this.cooperativeList = cooperativeList;
-    }
+ 
 
     @Override
     public int hashCode() {
