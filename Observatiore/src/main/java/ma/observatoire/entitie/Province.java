@@ -45,8 +45,7 @@ public class Province implements Serializable {
     @JoinColumn(name = "id_region", referencedColumnName = "id_region")
     @ManyToOne(optional = false)
     private Region idRegion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "province")
-    private List<Cooperative> cooperativeList;
+
 
     public Province() {
     }
@@ -84,13 +83,6 @@ public class Province implements Serializable {
         this.idRegion = idRegion;
     }
 
-    public List<Cooperative> getCooperativeList() {
-        return cooperativeList;
-    }
-
-    public void setCooperativeList(List<Cooperative> cooperativeList) {
-        this.cooperativeList = cooperativeList;
-    }
 
     @Override
     public int hashCode() {

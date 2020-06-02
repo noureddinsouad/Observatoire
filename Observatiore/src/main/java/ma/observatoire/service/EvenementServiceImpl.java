@@ -9,23 +9,24 @@ import javax.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ma.observatoire.dao.PublicationDao;
-import ma.observatoire.entitie.Publication;
+import ma.observatoire.dao.EvenementDao;
+import ma.observatoire.entitie.Evenement;
 @Service
-public class PublicationServiceImpl implements PublicationService {
+public class EvenementServiceImpl implements EvenementService {
 	@PersistenceContext
 	private EntityManager em;
    @Autowired
-   private PublicationDao  publicationDao;
-   public Publication getPublication(Integer id) {
-	   return publicationDao.findById(id)
-			   .orElse(null);
+   private EvenementDao dao;
+   public Evenement getEvenment(Integer id) {
+	    return dao.findById(id)
+	   .orElse(null);
    }
-	public List<Object[]> getPublicationsList() {
+   public List<Object[]> getEvenmentList() {
 		TypedQuery<Object[]> query = em.createQuery(
-				"select p.id ,p.name,p.date from Publication p ", Object[].class);
+				"select p.id ,p.name,p.date,p.description from Evenement p ", Object[].class);
 		List<Object[]> results = query.getResultList();
 		return results;
 	}
+   
    
 }

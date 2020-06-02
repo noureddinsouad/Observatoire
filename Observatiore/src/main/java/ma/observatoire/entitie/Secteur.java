@@ -40,10 +40,6 @@ public class Secteur implements Serializable {
     @Size(min = 1, max = 30)
     @Column(name = "secteur")
     private String secteur;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idSecteur")
-    private List<Branche> brancheList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idSecteur")
-    private List<Cooperative> cooperativeList;
 
     public Secteur() {
     }
@@ -73,21 +69,6 @@ public class Secteur implements Serializable {
         this.secteur = secteur;
     }
 
-    public List<Branche> getBrancheList() {
-        return brancheList;
-    }
-
-    public void setBrancheList(List<Branche> brancheList) {
-        this.brancheList = brancheList;
-    }
-
-    public List<Cooperative> getCooperativeList() {
-        return cooperativeList;
-    }
-
-    public void setCooperativeList(List<Cooperative> cooperativeList) {
-        this.cooperativeList = cooperativeList;
-    }
 
     @Override
     public int hashCode() {

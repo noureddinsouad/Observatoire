@@ -58,9 +58,6 @@ public class Prsident implements Serializable {
     @Size(min = 1, max = 30)
     @Column(name = "user_name")
     private String userName;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPresident")
-    private List<Cooperative> cooperativeList;
-
     public Prsident() {
     }
 
@@ -124,13 +121,7 @@ public class Prsident implements Serializable {
         this.userName = userName;
     }
 
-    public List<Cooperative> getCooperativeList() {
-        return cooperativeList;
-    }
 
-    public void setCooperativeList(List<Cooperative> cooperativeList) {
-        this.cooperativeList = cooperativeList;
-    }
 
     @Override
     public int hashCode() {

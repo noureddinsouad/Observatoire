@@ -68,8 +68,6 @@ public class Cooperative implements Serializable {
     private Double numerotpi;
     @Column(name = "telephone")
     private Integer telephone;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCooperative")
-    private List<Bilan> bilanList;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "idCooperative")
     private Donneesgenerales donneesgenerales;
     @JoinColumn(name = "branche", referencedColumnName = "id_branche")
@@ -173,13 +171,7 @@ public class Cooperative implements Serializable {
         this.telephone = telephone;
     }
 
-    public List<Bilan> getBilanList() {
-        return bilanList;
-    }
 
-    public void setBilanList(List<Bilan> bilanList) {
-        this.bilanList = bilanList;
-    }
 
     public Donneesgenerales getDonneesgenerales() {
         return donneesgenerales;

@@ -45,8 +45,7 @@ public class Branche implements Serializable {
     @JoinColumn(name = "id_secteur", referencedColumnName = "id_secteur")
     @ManyToOne(optional = false)
     private Secteur idSecteur;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "branche")
-    private List<Cooperative> cooperativeList;
+
 
     public Branche() {
     }
@@ -84,13 +83,6 @@ public class Branche implements Serializable {
         this.idSecteur = idSecteur;
     }
 
-    public List<Cooperative> getCooperativeList() {
-        return cooperativeList;
-    }
-
-    public void setCooperativeList(List<Cooperative> cooperativeList) {
-        this.cooperativeList = cooperativeList;
-    }
 
     @Override
     public int hashCode() {
