@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ma.observatoire.dao.RegionDao;
 import ma.observatoire.entitie.Region;
-@CrossOrigin
 @RestController
 @RequestMapping("/regions")
 public class RegionRest {

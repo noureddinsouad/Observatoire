@@ -2,6 +2,7 @@ package ma.observatoire.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,10 +35,11 @@ public class CooperativeController {
 	//private String username=jwtRequestFilter.getUsername();
 	@RequestMapping( value = "/", method = RequestMethod.POST )
 	public Cooperative create(@RequestBody CooperativeDTO cooperative){
-		
 		//System.out.println(username);
 		return cooperativeService.create(cooperative);
 	}
+	
+	
 	
 
 
@@ -58,6 +60,13 @@ public class CooperativeController {
 	}
 	
 	
+	
+	
+	@RequestMapping( value = "/afficher", method = RequestMethod.GET )
+	
+	public CooperativeDTO Afficher() {
+		return cooperativeService.read();
+	}
 	
 	
 	

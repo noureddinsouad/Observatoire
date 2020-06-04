@@ -86,9 +86,25 @@ public class CooperativeServiceImpl implements CooperativeService {
 		return cooperativeDao.save(newCooperative);
 	}
 
-	public Cooperative read(Double id) {
-		// TODO Auto-generated method stub
-		return null;
+	public CooperativeDTO read() {
+		Cooperative cooperative=cooperativeDao.findByidPresident(userDao.findByuserName(jwtRequestFilter.getUsername()));
+		cooperative.setIdCooperative(null);
+		CooperativeDTO newCooperative=new CooperativeDTO();
+		newCooperative.setAdresseActuelle(cooperative.getAdresseActuelle());
+        newCooperative.setSecteur(cooperative.getIdSecteur().getSecteur());
+        newCooperative.setBranche(cooperative.getBranche().getBranche());
+        java.util.Date date =new java.util.Date();
+        newCooperative.setDateCreation(cooperative.getDateCreation());
+        newCooperative.setDatedeclaration(date);
+        newCooperative.setFax(cooperative.getFax());
+        //newCooperative.setIdPresident(userDao.findByuserName(jwtRequestFilter.getUsername()));
+        newCooperative.setTelephone(cooperative.getTelephone());
+        newCooperative.setNom(cooperative.getNom());
+        newCooperative.setNombreAdherents(cooperative.getNombreAdherents());
+        newCooperative.setProvince(cooperative.getProvince().getProvince());
+        newCooperative.setRegion(cooperative.getRegion().getRegion());
+        newCooperative.setNumerotpi(cooperative.getNumerotpi());
+		return newCooperative;
 	}
 
 	public void delete(long id) {
@@ -97,10 +113,7 @@ public class CooperativeServiceImpl implements CooperativeService {
 	}
 
 	@Override
-	public Cooperative read(long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	public Cooperative update(long id, Cooperative cooperative) {
 		// TODO Auto-generated method stub

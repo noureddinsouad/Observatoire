@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import ma.observatoire.config.JwtTokenUtil;
+import ma.observatoire.entitie.Prsident;
 import ma.observatoire.model.JwtRequest;
 import ma.observatoire.model.JwtResponse;
 import ma.observatoire.model.UserDTO;
 import ma.observatoire.service.JwtUserDetailsService;
-
 @RestController
 @CrossOrigin
 public class JwtAuthenticationController {
@@ -63,4 +63,15 @@ public class JwtAuthenticationController {
 			throw new Exception("INVALID_CREDENTIALS", e);
 		}
 	}
+	@RequestMapping(value = "/compte/", method = RequestMethod.GET)
+	private Prsident show() {
+		return userDetailsService.show();
+	} 
+	@RequestMapping(value = "/modifierCompte/", method = RequestMethod.PUT)
+	private Prsident modifierCompte(@RequestBody UserDTO user) {
+		return userDetailsService.modifierCompte(user);
+	}
+	
+	
+	
 }

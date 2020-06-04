@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import ma.observatoire.config.JwtRequestFilter;
 import ma.observatoire.dao.UserDao;
 import ma.observatoire.entitie.Prsident;
 import ma.observatoire.model.UserDTO;
@@ -20,6 +21,9 @@ public class JwtUserDetailsService implements UserDetailsService {
 	@Autowired
 	private UserDao userDao;
 
+	@Autowired
+	private JwtRequestFilter jwtRequestFilter;
+	
 	@Autowired
 	private PasswordEncoder bcryptEncoder;
 
@@ -41,5 +45,25 @@ public class JwtUserDetailsService implements UserDetailsService {
 		//newUser.setIdUser(new Double(777));
 		newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
 		return userDao.save(newUser);
+	}
+	public Prsident show() {
+		
+		Prsident User= userDao.findByuserName(jwtRequestFilter.getUsername());
+		User.setPassword(null);
+	    User.setIdUser(null);
+		return User;
+	}
+	
+	public Prsident modifierCompte(UserDTO user) {
+		Prsident newUser =  userDao.findByuserName(jwtRequestFilter.getUsername());
+		newUser.setUserName(user.getUserName());
+		newUser.setNomPresident(user.getNomPresident());
+		newUser.setTelephonePresident(user.getTelephonePresident());
+		//newUser.setIdUser(new Double(777));
+		newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
+		userDao.save(newUser);
+		newUser.setPassword(null);
+		newUser.setIdUser(null);
+		return newUser;
 	}
 }

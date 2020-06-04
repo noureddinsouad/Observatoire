@@ -12,7 +12,7 @@ public interface CooperativeService {
 	
 	Cooperative create(CooperativeDTO cooperative);
 	
-	Cooperative read(long id);
+	CooperativeDTO read();
 	
 	Cooperative update(long id, Cooperative cooperative);
 	

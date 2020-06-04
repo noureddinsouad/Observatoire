@@ -13,7 +13,7 @@ import ma.observatoire.entitie.Evenement;
 import ma.observatoire.service.EvenementService;
 
 @RestController
-@CrossOrigin
+
 @RequestMapping("/evenement")
 public class EvenementController {
 private EvenementService evenementService;
